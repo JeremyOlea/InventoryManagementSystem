@@ -2,7 +2,17 @@ import React, { Component } from 'react';
 import './Home.css';
 import {Tab, Tabs, TabList, TabPanel} from "react-tabs";
 import 'react-tabs/style/react-tabs.css';
+import Table1 from "../TableHome"
 // import {Redirect} from 'react-router-dom';
+
+var data = [
+  {id: 1, name: 'Air Force 1s', value: '100'},
+  {id: 2, name: 'Balenciaga', value: '500'},
+  {id: 3, name: 'Sketchers', value: '10000'}
+];
+ 
+
+
 
 class Home extends Component {
   constructor(props){
@@ -27,6 +37,9 @@ class Home extends Component {
     this.setState({password: event.target.value});
   }
 
+
+
+
   render(){
     return (
       <div className="Home">
@@ -48,7 +61,8 @@ class Home extends Component {
               <Tab>Cart</Tab>
             </TabList>
             <TabPanel className="HomePanel">
-              Home
+              <Table1 data={data}/>
+              
             </TabPanel>
             <TabPanel className="PurchasesPanel">
               Purchases
@@ -80,3 +94,11 @@ class Home extends Component {
 
 }
 export default Home;
+
+{/* <div className="App">
+                {data.map((item) => {
+                  return (
+                    <Table1 data={item}/>
+                  );
+                })}
+              </div> */}
