@@ -7,15 +7,15 @@ import '../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
 
 
 function imageFormatter(cell, row){
-  console.log(cell);
-  return (
-  < img style = {{height: 100}} src={require(""+cell)} />
-  );
-}
+    console.log(cell);
+    return (
+    < img style = {{height: 100}} src={require(""+cell)} />
+    );
+  }
 
 
 
-class Table1 extends Component {
+class Table2 extends Component {
 
     render () {
       return (
@@ -30,12 +30,12 @@ class Table1 extends Component {
           <TableHeaderColumn dataField='value' dataSort={true}>
             Value
           </TableHeaderColumn>
+          <TableHeaderColumn dataField='date'>
+            Date Purchased
+          </TableHeaderColumn>
         </BootstrapTable>
       </div>
       )}
-};
-
-export default Table1;
-
-
-
+  };
+  
+  export default Table2;

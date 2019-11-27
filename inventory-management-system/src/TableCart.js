@@ -5,24 +5,14 @@ import './TableHome.css';
 import '../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
 
 
-
-function imageFormatter(cell, row){
-  console.log(cell);
-  return (
-  < img style = {{height: 100}} src={require(""+cell)} />
-  );
-}
-
-
-
-class Table1 extends Component {
+class Table3 extends Component {
 
     render () {
       return (
       <div>
-          <BootstrapTable data={this.props.data} striped={true} hover={true}>
-          <TableHeaderColumn dataField='image' dataFormat={imageFormatter}>
-            Image
+          <BootstrapTable data={this.props.data}>
+          <TableHeaderColumn dataField='id' >
+            Item ID
           </TableHeaderColumn>
           <TableHeaderColumn isKey={true} dataField='name' dataSort={true}>
             Name
@@ -30,12 +20,15 @@ class Table1 extends Component {
           <TableHeaderColumn dataField='value' dataSort={true}>
             Value
           </TableHeaderColumn>
+          <TableHeaderColumn dataField='quantity'>
+            Quantity
+          </TableHeaderColumn>
+          <TableHeaderColumn dataField='size'>
+            Size
+          </TableHeaderColumn>
         </BootstrapTable>
       </div>
       )}
-};
-
-export default Table1;
-
-
-
+  };
+  
+  export default Table3;
