@@ -1,23 +1,36 @@
 import React, { Component } from 'react';
 import {BootstrapTable, 
-       TableHeaderColumn} from 'react-bootstrap-table';
+       TableHeaderColumn, Image} from 'react-bootstrap-table';
 import './TableHome.css';
 import '../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
 
 
+// function imageFormatter(cell,row){
+//   return "<img src='{"+cell+"}'/>" ;
+// }
+
+function imageFormatter(cell, row){
+  console.log(cell);
+  return (
+  < img style = {{height: 100}} src={require(""+cell)} />
+  );
+}
+
+
 
 class Table1 extends Component {
+
     render () {
       return (
       <div>
-          <BootstrapTable data={this.props.data}>
-          <TableHeaderColumn isKey dataField='id'>
-            ID
+          <BootstrapTable data={this.props.data} striped={true} hover={true}>
+          <TableHeaderColumn dataField='image' dataFormat={imageFormatter}>
+            Image
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>
+          <TableHeaderColumn isKey={true} dataField='name' dataSort={true}>
             Name
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='value'>
+          <TableHeaderColumn dataField='value' dataSort={true}>
             Value
           </TableHeaderColumn>
         </BootstrapTable>

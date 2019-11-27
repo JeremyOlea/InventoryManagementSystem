@@ -6,9 +6,9 @@ import Table1 from "../TableHome"
 // import {Redirect} from 'react-router-dom';
 
 var data = [
-  {id: 1, name: 'Air Force 1s', value: '100'},
-  {id: 2, name: 'Balenciaga', value: '500'},
-  {id: 3, name: 'Sketchers', value: '10000'}
+  {image: './Images/HEAT.jpg', name: 'Air Force 1s', value: '100'},
+  {image: './Images/HEAT.jpg', name: 'Balenciaga', value: '500'},
+  {image: './Images/HEAT.jpg', name: 'Sketchers', value: '10000'}
 ];
  
 
