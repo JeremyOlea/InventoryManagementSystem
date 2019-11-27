@@ -8,9 +8,9 @@ class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-        items: {},
-        purchases: {},
-        cart: {},
+        items: (0),
+        purchases: ["Item 1", "Item 2", "Item 3"],
+        cart: (0),
         email: "",
         password: "",
     };
@@ -51,7 +51,15 @@ class Home extends Component {
               Home
             </TabPanel>
             <TabPanel className="PurchasesPanel">
-              Purchases
+              <div>
+              {this.state.purchases.map((item) =>{
+                return (
+                    <div>
+                      {item}
+                    </div>
+                  );
+                 })}
+              </div>
             </TabPanel>
             <TabPanel className="CartPanel">
               Cart
