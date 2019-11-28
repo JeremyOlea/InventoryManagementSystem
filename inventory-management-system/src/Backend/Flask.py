@@ -43,11 +43,16 @@ class get_all_accessories(Resource):
         db = DatabaseController.imsdatabase()
         db.getAllAccessories(); 
 
+class hello_world(Resource):
+    def get(self):
+        return {'hello' : 'hello world'}
+
 api.add_resource(get_all_items, '/getItems')
 api.add_resource(get_all_tops, '/getTops')
 api.add_resource(get_all_bottoms, '/getBottoms')
 api.add_resource(get_all_shoes, '/getShoes')
 api.add_resource(get_all_accessories, '/getAccessories')
+api.add_resource(hello_world, '/HelloWorld')
 
 if __name__ = "__main__":
     app.run(debug = true)
