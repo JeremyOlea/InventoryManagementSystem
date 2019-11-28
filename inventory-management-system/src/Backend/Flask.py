@@ -1,11 +1,11 @@
 from flask import Flask
-from flask_cors import CORS
+from flask_cors import CORS as CORS
 from flask import request
 from flask import render_template
 from flask_restful import reqparse, abort, Api, Resource
 from flask_json import FlaskJSON, JsonError, json_response, as_json
 
-import commondatalayer
+import DatabaseController
 import json
 
 
@@ -54,5 +54,5 @@ api.add_resource(get_all_shoes, '/getShoes')
 api.add_resource(get_all_accessories, '/getAccessories')
 api.add_resource(hello_world, '/HelloWorld')
 
-if __name__ = "__main__":
-    app.run(debug = true)
+if __name__ == "__main__":
+    app.run()
