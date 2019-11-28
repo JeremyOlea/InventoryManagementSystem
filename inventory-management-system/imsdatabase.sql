@@ -67,7 +67,7 @@ CREATE TABLE INVENTORY
 
 CREATE TABLE ITEM
 ( ItemID		INT			NOT NULL,
-  Name		INT			NOT NULL,
+  Name      VARCHAR(100)			NOT NULL,
   Price			INT			NOT NULL,
   Gender		CHAR(1)		NOT NULL,
   Stock		INT,
