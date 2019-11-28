@@ -5,6 +5,9 @@ import 'react-tabs/style/react-tabs.css';
 import Table1 from "../TableHome"
 import Table2 from "../TablePurchases"
 import Table3 from "../TableCart"
+import { Button } from 'semantic-ui-react';
+import axios from 'axios';
+import { thisTypeAnnotation } from '@babel/types';
 // import {Redirect} from 'react-router-dom';
 
 var data = [
@@ -37,6 +40,7 @@ class Home extends Component {
         cart: (0),
         email: "",
         password: "",
+        hello : "",
     };
 
     this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -52,6 +56,14 @@ class Home extends Component {
   }
 
 
+  linkFlask(event) {
+    event.preventDefault();
+    axios.get('http://localhost:5000/HelloWorld')
+    .then(res => {
+        console.log(res);
+        alert(res.data['hello']);
+    })
+  }
 
 
   render(){
@@ -63,6 +75,7 @@ class Home extends Component {
             <span className="login">
               <input type="text" placeholder="Email" value={this.state.email} onChange={this.handleEmailChange}></input>
               <input type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange}></input>
+              <Button onClick={this.linkFlask}>Login</Button>
             </span>
           </form>
         <div>

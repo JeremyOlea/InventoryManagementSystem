@@ -2,7 +2,7 @@ import mysql.connector
 
 class imsdatabse():
 
-     def __init__(self):
+    def __init__(self):
        self.conn = mysql.connector.connect(
             host="107.180.50.225",
             user="admin3",
@@ -10,7 +10,7 @@ class imsdatabse():
             database="imsdb3"
         )
 
-     def __del__(self):
+    def __del__(self):
         self.conn.close()
 
     def getAllItems(self):
@@ -77,5 +77,5 @@ class imsdatabse():
         cursor.close()
         return items
 
-    def getAllPurchases(self):
-        #we need user table
+    # def getAllPurchases(self):
+    #     #we need user table
