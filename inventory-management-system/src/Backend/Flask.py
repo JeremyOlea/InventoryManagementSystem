@@ -20,7 +20,7 @@ parser.add_argument('task')
 class get_all_items(Resource):
     def get(self):
         db = DatabaseController.imsdatabase()
-        db.getAllItems();
+        return db.getAllItems();
 
     
 class get_all_tops(Resource):

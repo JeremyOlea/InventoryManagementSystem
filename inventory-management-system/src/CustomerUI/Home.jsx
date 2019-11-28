@@ -8,7 +8,7 @@ import Table3 from "../TableCart"
 import { Button } from 'semantic-ui-react';
 import axios from 'axios';
 import { thisTypeAnnotation } from '@babel/types';
-// import {Redirect} from 'react-router-dom';
+
 
 var data = [
   {image: './Images/AF1.jpg', name: 'Air Force 1s', value: '100'},
@@ -35,7 +35,7 @@ class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-        items: (0),
+        items: [],
         purchases: ["Item 1", "Item 2", "Item 3"],
         cart: (0),
         email: "",
@@ -53,6 +53,24 @@ class Home extends Component {
 
   handlePasswordChange(event){
     this.setState({password: event.target.value});
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/getItems')
+    .then(res => {
+      console.log(res);
+      let testdata = [];
+      for(let i = 0; i < res.data.length; i++) {
+        testdata.push({image: './Images/AF1.jpg', name: res.data[i]['Name'], value: res.data[i]['Price']});
+      }
+      
+      this.setState({
+        items : testdata
+      })
+      console.log(testdata);
+    }).catch(err => {
+      console.log(err);
+    })
   }
 
 
@@ -88,7 +106,7 @@ class Home extends Component {
               <Tab>Cart</Tab>
             </TabList>
             <TabPanel className="HomePanel">
-              <Table1 data={data} />
+              <Table1 data={this.state.items} />
 
             </TabPanel>
             <TabPanel className="PurchasesPanel">

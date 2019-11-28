@@ -1,6 +1,6 @@
 import mysql.connector
 
-class imsdatabse():
+class imsdatabase():
 
     def __init__(self):
        self.conn = mysql.connector.connect(
@@ -14,7 +14,7 @@ class imsdatabse():
         self.conn.close()
 
     def getAllItems(self):
-        sqlString = """SELECT * FROM ITEMS"""
+        sql = """SELECT * FROM ITEM"""
         cursor = self.conn.cursor()
         cursor.execute(sql)
         result = cursor.fetchall()
@@ -24,13 +24,12 @@ class imsdatabse():
         #convert it to JSON
         items =[]
         for row in result:
-            items.append({ 'ItemID' : row[0], 'Name' : row[1], 'Price' : row[2], \
-             'Gender' : row[3], 'Stock' : row[4], 'StoreID' : row[5], 'SupplierID' : row[6]})
+            items.append({ 'ItemID' : row[0], 'Name' : row[1], 'Price' : row[2], 'Gender' : row[3], 'Stock' : row[4], 'StoreID' : row[5], 'SupplierID' : row[6]})
         cursor.close()
         return items
 
     def getAllTops(self):
-        sqlString = """SELECT * FROM TOPS"""
+        sql = """SELECT * FROM TOPS"""
         cursor = self.conn.cursor()
         cursor.execute(sql)
         result = cursor.fetchall()
@@ -42,7 +41,7 @@ class imsdatabse():
         return items
 
     def getAllBottoms(self):
-        sqlString = """SELECT * FROM BOTTOMS"""
+        sql = """SELECT * FROM BOTTOMS"""
         cursor = self.conn.cursor()
         cursor.execute(sql)
         result = cursor.fetchall()
@@ -54,7 +53,7 @@ class imsdatabse():
         return items
 
     def getAllShoes(self):
-        sqlString = """SELECT * FROM SHOES"""
+        sql = """SELECT * FROM SHOES"""
         cursor = self.conn.cursor()
         cursor.execute(sql)
         result = cursor.fetchall()
@@ -66,7 +65,7 @@ class imsdatabse():
         return items
 
     def getAllAccessories(self):
-        sqlString = """SELECT * FROM ACCESSORIES"""
+        sql = """SELECT * FROM ACCESSORIES"""
         cursor = self.conn.cursor()
         cursor.execute(sql)
         result = cursor.fetchall()
