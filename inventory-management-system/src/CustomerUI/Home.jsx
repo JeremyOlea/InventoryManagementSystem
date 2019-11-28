@@ -2,15 +2,39 @@ import React, { Component } from 'react';
 import './Home.css';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import Table1 from "../TableHome"
+import Table2 from "../TablePurchases"
+import Table3 from "../TableCart"
 // import {Redirect} from 'react-router-dom';
+
+var data = [
+  {image: './Images/AF1.jpg', name: 'Air Force 1s', value: '100'},
+  {image: './Images/COLD.jpg', name: 'Balenciaga', value: '500'},
+  {image: './Images/HEAT.jpg', name: 'Sketchers', value: '10000'}
+];
+
+var data2 = [
+  {image: './Images/AF1.jpg', name: 'Air Force 1s', value: '100', date: '11/06/13'},
+  {image: './Images/COLD.jpg', name: 'Balenciaga', value: '500', date: '11/07/13'},
+  {image: './Images/HEAT.jpg', name: 'Sketchers', value: '10000', date: '11/08/13'}
+];
+
+var data3 = [
+  {id: 111, name: 'Air Force 1s', value: '100', quantity: 2, size: 9},
+  {id: 125, name: 'Balenciaga', value: '500', quantity:  3, size: 9},
+  {id: 101, name: 'Sketchers', value: '10000', quantity: 1, size: 9}
+];
+
+
+
 
 class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-        items: {},
-        purchases: {},
-        cart: {},
+        items: (0),
+        purchases: ["Item 1", "Item 2", "Item 3"],
+        cart: (0),
         email: "",
         password: "",
     };
@@ -27,6 +51,9 @@ class Home extends Component {
     this.setState({password: event.target.value});
   }
 
+
+
+
   render(){
     return (
       <div className="Home">
@@ -41,20 +68,21 @@ class Home extends Component {
         <div>
         </div>
         {/* <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" /> */}
-          <Tabs defaultIndex={1}>
+          <Tabs defaultIndex={0}>
             <TabList>
               <Tab>Home</Tab>
               <Tab>Purchases</Tab>
               <Tab>Cart</Tab>
             </TabList>
             <TabPanel className="HomePanel">
-              Home
+              <Table1 data={data} />
+
             </TabPanel>
             <TabPanel className="PurchasesPanel">
-              Purchases
+              <Table2 data={data2}/>
             </TabPanel>
             <TabPanel className="CartPanel">
-              Cart
+              <Table3 data={data3}/>
             </TabPanel>
           </Tabs>
           <br></br><br></br><br></br><br></br><br></br><br></br>
@@ -80,3 +108,11 @@ class Home extends Component {
 
 }
 export default Home;
+
+{/* <div className="App">
+                {data.map((item) => {
+                  return (
+                    <Table1 data={item}/>
+                  );
+                })}
+              </div> */}
