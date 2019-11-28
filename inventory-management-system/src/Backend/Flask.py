@@ -48,3 +48,6 @@ api.add_resource(get_all_tops, '/getTops')
 api.add_resource(get_all_bottoms, '/getBottoms')
 api.add_resource(get_all_shoes, '/getShoes')
 api.add_resource(get_all_accessories, '/getAccessories')
+
+if __name__ = "__main__":
+    app.run(debug = true)
