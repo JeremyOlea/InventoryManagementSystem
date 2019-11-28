@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Home.css';
-import {Tab, Tabs, TabList, TabPanel} from "react-tabs";
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 // import {Redirect} from 'react-router-dom';
 
