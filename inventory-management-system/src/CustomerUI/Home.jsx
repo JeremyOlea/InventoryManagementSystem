@@ -140,10 +140,3 @@ class Home extends Component {
 }
 export default Home;
 
-{/* <div className="App">
-                {data.map((item) => {
-                  return (
-                    <Table1 data={item}/>
-                  );
-                })}
-              </div> */}
