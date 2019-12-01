@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
-import Home from './CustomerUI/Home'
+import Home from './CustomerUI/Home';
+import Signup from './Signup';
 
 function App() {
   return (
-    <Home/>
+    <Signup/>
   );
 }
 

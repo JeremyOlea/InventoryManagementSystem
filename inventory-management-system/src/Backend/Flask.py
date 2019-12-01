@@ -26,22 +26,22 @@ class get_all_items(Resource):
 class get_all_tops(Resource):
     def get(self):
         db = DatabaseController.imsdatabase()
-        db.getAllTops();
+        return db.getAllTops();
 
 class get_all_bottoms(Resource):
     def get(self):
         db = DatabaseController.imsdatabase()
-        db.getAllBottoms();
+        return db.getAllBottoms();
 
 class get_all_shoes(Resource):
     def get(self):
         db = DatabaseController.imsdatabase()
-        db.getAllShoes();  
+        return db.getAllShoes();  
 
 class get_all_accessories(Resource):
     def get(self):
         db = DatabaseController.imsdatabase()
-        db.getAllAccessories(); 
+        return db.getAllAccessories(); 
 
 class hello_world(Resource):
     def get(self):
