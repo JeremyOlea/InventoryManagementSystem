@@ -90,7 +90,7 @@ class Home extends Component {
       <div className="Home">
         <div>
           <form>
-            Shop Name
+            Shop Name<br></br>
             <span className="login">
               <input type="text" placeholder="Email" value={this.state.email} onChange={this.handleEmailChange}></input>
               <input type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange}></input>
