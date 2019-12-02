@@ -86,9 +86,15 @@ class Home extends Component {
 
   checkLogin(event){
     event.preventDefault();
-    axios.get('http://localhost:5000/checkLogin')
+
+    let loginCred = {
+      email: this.state.email,
+      password: this.state.email
+    };
+
+    axios.get('http://localhost:5000/checkLogin', loginCred)
     .then(res => {
-      console.log(res);      
+      console.log(res);
     })
   }
 

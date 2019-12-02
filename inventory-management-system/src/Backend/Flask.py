@@ -50,7 +50,7 @@ class hello_world(Resource):
 class check_login(Resource):
     def get(self):
         db = DatabaseController.imsdatabase()
-        db.checkLogin();
+        db.checkLogin(data['email'], data['password']);
 
 api.add_resource(get_all_items, '/getItems')
 api.add_resource(get_all_tops, '/getTops')
