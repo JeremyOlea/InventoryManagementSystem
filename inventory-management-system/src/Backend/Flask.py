@@ -48,9 +48,12 @@ class hello_world(Resource):
         return {'hello' : 'hello world'}
 
 class check_login(Resource):
-    def get(self):
+    def post(self):
         db = DatabaseController.imsdatabase()
-        db.checkLogin(data['email'], data['password']);
+        data = request.get_json()
+        print(data)
+        retval = db.checkLogin(data['email'], data['password'])
+        return retval;
 
 api.add_resource(get_all_items, '/getItems')
 api.add_resource(get_all_tops, '/getTops')

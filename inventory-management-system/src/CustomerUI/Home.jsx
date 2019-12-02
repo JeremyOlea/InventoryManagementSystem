@@ -35,17 +35,20 @@ var data3 = [
 class Home extends Component {
   constructor(props){
     super(props);
+
     this.state = {
+        user: {},
         items: [],
         purchases: ["Item 1", "Item 2", "Item 3"],
         cart: (0),
-        email: "",
-        password: "",
-        hello : "",
+        email: '',
+        password: '',
+        hello : '',
     };
 
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.checkLogin = this.checkLogin.bind(this);
   }
 
   handleEmailChange(event) {
@@ -83,21 +86,36 @@ class Home extends Component {
         alert(res.data['hello']);
     })
   }
-
+  
   checkLogin(event){
     event.preventDefault();
 
     let loginCred = {
-      email: this.state.email,
-      password: this.state.email
+        email: this.state.email,
+        password: this.state.password
     };
 
-    axios.get('http://localhost:5000/checkLogin', loginCred)
+    console.log(loginCred);
+
+    axios.post('http://localhost:5000/checkLogin', loginCred)
     .then(res => {
       console.log(res);
+      if(res.data == null){
+        alert("Wrong Login Credentials!");
+      } else {
+        this.setState({
+          user: {
+            userID: res.data['UserID'],
+            fname: res.data['Fname'],
+            lname: res.data['Lname'],
+            address: res.data['Address'],
+            email: res.data['email'],
+            password: res.data['password']
+          }
+        })
+      }
     })
   }
-
 
   render(){
     return (
