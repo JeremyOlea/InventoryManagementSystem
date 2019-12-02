@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import './Home.css';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
@@ -12,9 +11,9 @@ import { thisTypeAnnotation } from '@babel/types';
 
 
 var data = [
-  {image: './Images/AF1.jpg', name: 'Air Force 1s', value: '100'},
-  {image: './Images/COLD.jpg', name: 'Balenciaga', value: '500'},
-  {image: './Images/HEAT.jpg', name: 'Sketchers', value: '10000'}
+  {image: './Images/AF1.jpg', name: 'Air Force 1s', value: '100', id: 1},
+  {image: './Images/COLD.jpg', name: 'Balenciaga', value: '500', id: 2},
+  {image: './Images/HEAT.jpg', name: 'Sketchers', value: '10000', id:3}
 ];
 
 var data2 = [
@@ -62,7 +61,7 @@ class Home extends Component {
       console.log(res);
       let testdata = [];
       for(let i = 0; i < res.data.length; i++) {
-        testdata.push({image: './Images/AF1.jpg', name: res.data[i]['Name'], value: res.data[i]['Price']});
+        testdata.push({image: './Images/AF1.jpg', name: res.data[i]['Name'], value: res.data[i]['Price'], id:i});
       }
       
       this.setState({

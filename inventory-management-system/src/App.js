@@ -2,17 +2,15 @@ import React from 'react';
 import './App.css';
 import Home from './CustomerUI/Home';
 import Signup from './Signup';
+import Item from './CustomerUI/Item';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
-function App() {
+const App = () => {
   return (
-    <Signup/>
+    <Router>
+      <Route exact path="/" component={Home} />
+    </Router>
   );
 }
 
 export default App;
-
-{/* <div className="App">
-      <header className="App-header">
-        Inventory Management System
-      </header>
-    </div> */}
