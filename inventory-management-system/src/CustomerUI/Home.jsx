@@ -84,6 +84,14 @@ class Home extends Component {
     })
   }
 
+  checkLogin(event){
+    event.preventDefault();
+    axios.get('http://localhost:5000/checkLogin')
+    .then(res => {
+      console.log(res);      
+    })
+  }
+
 
   render(){
     return (
@@ -94,7 +102,7 @@ class Home extends Component {
             <span className="login">
               <input type="text" placeholder="Email" value={this.state.email} onChange={this.handleEmailChange}></input>
               <input type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange}></input>
-              <Button onClick={this.linkFlask}>Login</Button>
+              <Button onClick={this.checkLogin}>Login</Button>
             </span>
           </form>
         <div>

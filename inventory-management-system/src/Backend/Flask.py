@@ -47,12 +47,18 @@ class hello_world(Resource):
     def get(self):
         return {'hello' : 'hello world'}
 
+class check_login(Resource):
+    def get(self):
+        db = DatabaseController.imsdatabase()
+        db.checkLogin();
+
 api.add_resource(get_all_items, '/getItems')
 api.add_resource(get_all_tops, '/getTops')
 api.add_resource(get_all_bottoms, '/getBottoms')
 api.add_resource(get_all_shoes, '/getShoes')
 api.add_resource(get_all_accessories, '/getAccessories')
 api.add_resource(hello_world, '/HelloWorld')
+api.add_resource(check_login, '/checkLogin')
 
 if __name__ == "__main__":
     app.run()

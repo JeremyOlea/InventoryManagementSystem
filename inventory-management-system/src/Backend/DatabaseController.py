@@ -76,5 +76,17 @@ class imsdatabase():
         cursor.close()
         return items
 
+    def checkLogin(email, password):
+        sql = """   SELECT  * 
+                    FROM    CUSTOMER 
+                    WHERE   Email = {0} AND Password = {1}"""
+        cursor = self.conn.cursor()
+        cursor.execute(sql.format(email, password))
+        cursor.conn.commit()
+        retval = cursor.lastrowid
+        cursor.close()
+        return retval
+
+
     # def getAllPurchases(self):
     #     #we need user table
