@@ -97,8 +97,10 @@ class Home extends Component {
     return (
       <div className="Home">
         <div>
-          <form>
+          <h1 className="App-header">
             Shop Name<br></br>
+          </h1>
+          <form>  
             <span className="login">
               <input type="text" placeholder="Email" value={this.state.email} onChange={this.handleEmailChange}></input>
               <input type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange}></input>
