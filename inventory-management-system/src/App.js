@@ -1,17 +1,15 @@
 import React from 'react';
 import './App.css';
-import Home from './CustomerUI/Home'
+import Home from './CustomerUI/Home';
+import Item from './CustomerUI/Item';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
-function App() {
+const App = () => {
   return (
-    <Home/>
+    <Router>
+      <Route exact path="/" component={Home} />
+    </Router>
   );
 }
 
 export default App;
-
-{/* <div className="App">
-      <header className="App-header">
-        Inventory Management System
-      </header>
-    </div> */}
