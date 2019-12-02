@@ -51,7 +51,7 @@ class register_user(Resource):
     def post(self):
         data = request.get_json()
         db = DatabaseController.imsdatabase()
-        db.addNewUser(100, data['firstName'], data['lastName'], data['address'], data['email'], data['password'])
+        db.addNewUser(None, data['firstName'], data['lastName'], data['address'], data['email'], data['password'])
         return "success";
         
 
