@@ -13,7 +13,6 @@ class Item extends React.Component {
     render() {
         return(
             <body>
-            {/* <div className= "container">          */}
                 <div className="sidenav">
                     <Link to="/">Home</Link>
                     <a href="#">Add To Cart</a>
@@ -26,7 +25,6 @@ class Item extends React.Component {
                     </div>
                     <p>Price: 100</p>
                 </div>
-            {/* </div>  */}
             </body>
         )};
 }
