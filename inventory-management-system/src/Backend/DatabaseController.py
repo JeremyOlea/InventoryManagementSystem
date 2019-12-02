@@ -76,5 +76,14 @@ class imsdatabase():
         cursor.close()
         return items
 
+    def addNewUser(self, uid, fname, lname, address, email, password):
+        sql = """INSERT INTO CUSTOMER VALUES ('{0}','{1}','{2}','{3}','{4}','{5}')"""
+        cursor = self.conn.cursor()
+        cursor.execute(sql.format(uid,fname, lname, address, email, password))
+        self.conn.commit()
+        retval = cursor.lastrowid
+        cursor.close()
+        return retval;
+
     # def getAllPurchases(self):
     #     #we need user table

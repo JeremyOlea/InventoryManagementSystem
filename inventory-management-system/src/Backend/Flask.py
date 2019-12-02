@@ -47,12 +47,21 @@ class hello_world(Resource):
     def get(self):
         return {'hello' : 'hello world'}
 
+class register_user(Resource):
+    def post(self):
+        data = request.get_json()
+        db = DatabaseController.imsdatabase()
+        db.addNewUser(100, data['firstName'], data['lastName'], data['address'], data['email'], data['password'])
+        return "success";
+        
+
 api.add_resource(get_all_items, '/getItems')
 api.add_resource(get_all_tops, '/getTops')
 api.add_resource(get_all_bottoms, '/getBottoms')
 api.add_resource(get_all_shoes, '/getShoes')
 api.add_resource(get_all_accessories, '/getAccessories')
 api.add_resource(hello_world, '/HelloWorld')
+api.add_resource(register_user, '/registerUser')
 
 if __name__ == "__main__":
     app.run()
