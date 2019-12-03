@@ -86,20 +86,20 @@ class imsdatabase():
         return retval;
 
     def addPurchase(self, uid, itemId, quantity):
-        sql = """SELECT * FROM PURCHASE WHERE UserId = '{0}' AND ItemId = '{1}'"""
+        sql = """SELECT * FROM PURCHASE WHERE UserID = '{0}' AND ItemID = '{1}'"""
         cursor = self.conn.cursor()
         cursor.execute(sql.format(uid,itemId))
         result = cursor.fetchone()
 
         if result[0] == null:
-            sql2 = """INSERT INTO PURCHASE VALUES ('{0}', '{1}', {2})"""
+            sql2 = """INSERT INTO PURCHASE VALUES ('{0}', '{1}', {2})""" # will not work because we need purchaseID and Date
             cursor.execute(sql2.format(uid, itemId, quantity))
             self.conn.commit()
 
         else:
             sql3 = """  UPDATE PURCHASE 
                         SET Quantity = {0} 
-                        WHERE ItemId = {1}"""
+                        WHERE ItemID = {1}"""
             cursor.execute(sql3.format(result[2] + quantity, itemId))
             self.conn.commit()
 
@@ -110,7 +110,7 @@ class imsdatabase():
     def getPurchases(self, uid):
         sql = """   SELECT *
                     FROM PURCHASE as P, ITEM as I
-                    WHERE P.UserId = '{0}' AND P.ItemId = I.ItemId  """ # Might not work because of same attribute names
+                    WHERE P.UserID = '{0}' AND P.ItemID = I.ItemID  """ # Might not work because of same attribute names
         cursor = self.conn.cursor()
         cursor.execute(sql.format(uid))
         result = cursor.fetchall()
