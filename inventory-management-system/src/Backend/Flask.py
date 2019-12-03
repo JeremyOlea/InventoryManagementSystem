@@ -54,6 +54,18 @@ class register_user(Resource):
         db.addNewUser(None, data['firstName'], data['lastName'], data['address'], data['email'], data['password'])
         return "success";
         
+class add_purchase(Resource):
+    def post(self):
+        data = request.get_json()
+        db = DatabaseController.imsdatabase()
+        db.addPurchase(data['uid'], data['itemId'], data['quantity'])
+        return "success"
+
+class get_purchases(Resource):
+    def post(self):
+        data = request.get_json()
+        db = DatabaseController.imsdatabase()
+        return db.getPurchases(data['uid'])
 
 api.add_resource(get_all_items, '/getItems')
 api.add_resource(get_all_tops, '/getTops')
@@ -62,6 +74,8 @@ api.add_resource(get_all_shoes, '/getShoes')
 api.add_resource(get_all_accessories, '/getAccessories')
 api.add_resource(hello_world, '/HelloWorld')
 api.add_resource(register_user, '/registerUser')
+api.add_resource(add_purchase, '/addPurchase')
+api.get_purchases(get_purchases, '/getPurchases')
 
 if __name__ == "__main__":
     app.run()

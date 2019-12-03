@@ -85,5 +85,48 @@ class imsdatabase():
         cursor.close()
         return retval;
 
-    # def getAllPurchases(self):
-    #     #we need user table
+    def addPurchase(self, uid, itemId, quantity):
+        sql = """SELECT * FROM PURCHASE WHERE UserId = '{0}' AND ItemId = '{1}'"""
+        cursor = self.conn.cursor()
+        cursor.execute(sql.format(uid,itemId))
+        result = cursor.fetchone()
+
+        if result[0] == null:
+            sql2 = """INSERT INTO PURCHASE VALUES ('{0}', '{1}', {2})"""
+            cursor = self.conn.cursor()
+            cursor.execute(sql2.format(uid, itemId, quantity))
+            self.conn.commit()
+            cursor.close()
+        else:
+            sql3 = """  UPDATE PURCHASE 
+                        SET Quantity = {0} 
+                        WHERE ItemId = {1}"""
+            cursor = self.conn.cursor()
+            cursor.execute(sql3.format(result[2] + quantity, itemId))
+
+        cursor.close()
+
+
+    def getPurchases(self, uid):
+        sql = """SELECT * FROM PURCHASE WHERE UserId = '{0}'""" #FIX THIS, YOU CAN MAKE IT SIMPLER WITH JOIN
+        cursor = self.conn.cursor()
+        cursor.execute(sql.format(uid))
+        result = cursor.fetchall()
+        cursor.close()
+        
+        items =[]
+        for row in result:
+            items.append({'Item' : getItemFromId(row[1]), 'quantity': row[2]}) # row[1] would be itemId if purchases looks like [userId, itemId, quantity] 
+        return items
+
+    def getItemFromId(self, itemId):
+        sql = """SELECT * FROM ITEM WHERE ItemId = '{0}' """
+        cursor = self.conn.cursor()
+        cursor.execute(sql.format(itemId))
+        result = cursor.fetchone()
+        cursor.close()
+
+        return {'ItemID' : result[0], 'Name' : result[1], 'Price' : result[2], 'Gender' : result[3], \
+                    'Stock' : result[4], 'StoreID' : result[5], 'SupplierID' : result[6]}
+
+        
