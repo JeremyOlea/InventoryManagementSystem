@@ -93,40 +93,33 @@ class imsdatabase():
 
         if result[0] == null:
             sql2 = """INSERT INTO PURCHASE VALUES ('{0}', '{1}', {2})"""
-            cursor = self.conn.cursor()
             cursor.execute(sql2.format(uid, itemId, quantity))
             self.conn.commit()
-            cursor.close()
+
         else:
             sql3 = """  UPDATE PURCHASE 
                         SET Quantity = {0} 
                         WHERE ItemId = {1}"""
-            cursor = self.conn.cursor()
             cursor.execute(sql3.format(result[2] + quantity, itemId))
+            self.conn.commit()
 
         cursor.close()
+        return "Success"
 
 
     def getPurchases(self, uid):
-        sql = """SELECT * FROM PURCHASE WHERE UserId = '{0}'""" #FIX THIS, YOU CAN MAKE IT SIMPLER WITH JOIN
+        sql = """   SELECT *
+                    FROM PURCHASE as P, ITEM as I
+                    WHERE P.UserId = '{0}' AND P.ItemId = I.ItemId  """ # Might not work because of same attribute names
         cursor = self.conn.cursor()
         cursor.execute(sql.format(uid))
         result = cursor.fetchall()
-        cursor.close()
         
         items =[]
         for row in result:
-            items.append({'Item' : getItemFromId(row[1]), 'quantity': row[2]}) # row[1] would be itemId if purchases looks like [userId, itemId, quantity] 
+            items.append({'Object' : row}) # I dont know the order -- This will be 3D array
         return items
 
-    def getItemFromId(self, itemId):
-        sql = """SELECT * FROM ITEM WHERE ItemId = '{0}' """
-        cursor = self.conn.cursor()
-        cursor.execute(sql.format(itemId))
-        result = cursor.fetchone()
         cursor.close()
-
-        return {'ItemID' : result[0], 'Name' : result[1], 'Price' : result[2], 'Gender' : result[3], \
-                    'Stock' : result[4], 'StoreID' : result[5], 'SupplierID' : result[6]}
 
         
