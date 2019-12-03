@@ -51,7 +51,6 @@ class check_login(Resource):
     def post(self):
         db = DatabaseController.imsdatabase()
         data = request.get_json()
-        print(data)
         retval = db.checkLogin(data['email'], data['password'])
         return retval;
 
