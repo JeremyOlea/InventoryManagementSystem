@@ -1,18 +1,21 @@
 import Navbar from './Navbar';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import '../CustomerUI/Home.css';
+import { Link } from 'react-router-dom';
+import './Checkout.css';
+
 
 export default class Checkout extends React.Component {
     render(){
         return (
+            
+            <div class="container">
             <div className="app-container">
-            <div className="row">
-                <div className="col no-gutters">
+                
                 <Page />
-                </div>
+                
             </div>
             </div>
+            
         )
     }
 }

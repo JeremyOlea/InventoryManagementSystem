@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {BootstrapTable, 
        TableHeaderColumn} from 'react-bootstrap-table';
-import './TableHome.css';
 import '../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
 import {Link, BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -10,7 +9,7 @@ function imageFormatter(cell){
   console.log('Cell: ' + cell);
   return (
   <div>
-    <Link to="/" >
+    <Link to="/cart" >
       < img style = {{height: 100}} src={require(""+cell)} />
     </Link>
   </div>
@@ -24,7 +23,7 @@ class Table3 extends Component {
     render () {
 
       const selectedRow = {
-        mode: 'radio'
+        mode: 'checkbox'
       };
 
       return (

@@ -46,7 +46,8 @@ class Home extends Component {
         password: "",
         hello : "",
         total: 0,
-        showPopup: false
+        showPopup: false,
+        showCheckoutTable: true
     };
 
     this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -57,6 +58,10 @@ class Home extends Component {
     this.setState({
       showPopup: !this.state.showPopup
     });
+  }
+
+  toggleTable() {
+    this.setState ({showCheckoutTable: !this.state.showCheckoutTable});
   }
 
   handleEmailChange(event) {
@@ -132,15 +137,13 @@ class Home extends Component {
               <Table2 data={data2}/>
             </TabPanel>
             <TabPanel className="CartPanel">
-              <Table3 data={data3}/>
-              <p>Total: ${this.state.total} </p>
-              <button type="button" class="btn btn-primary" onClick={this.togglePopUp.bind(this)}>Checkout</button>
-              {this.state.showPopup ?
-              <Checkout></Checkout>
-                :null
-              }
-      
+              
+              <Table3 data={data3}>
             
+              </Table3>
+              <Link to="/cart">
+              <button type="button" class="btn btn-primary" >Checkout</button>
+              </Link>
             </TabPanel>
           </Tabs>
           <br></br><br></br><br></br><br></br><br></br><br></br>
@@ -168,3 +171,11 @@ class Home extends Component {
 }
 export default Home;
 
+
+
+// {this.state.showPopup ?
+//   <Checkout></Checkout>
+//     :null
+//   }
+
+//<p>Total: ${this.state.total} </p>
