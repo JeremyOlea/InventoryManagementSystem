@@ -10,20 +10,26 @@ function imageFormatter(cell){
   console.log('Cell: ' + cell);
   return (
   <div>
-    <Link to="/Item/:itemID" >
-      < img style = {{height: 100}} src={require(""+cell)}/>
+    <Link to="/" >
+      < img style = {{height: 100}} src={require(""+cell)} />
     </Link>
   </div>
   );
 }
 
 
+
 class Table3 extends Component {
 
     render () {
+
+      const selectedRow = {
+        mode: 'radio'
+      };
+
       return (
       <div>
-          <BootstrapTable data={this.props.data}>
+          <BootstrapTable data={this.props.data} selectRow={selectedRow} deleteRow>
           <TableHeaderColumn dataField='id' >
             Item ID
           </TableHeaderColumn>
@@ -38,9 +44,6 @@ class Table3 extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='size'>
             Size
-          </TableHeaderColumn>
-          <TableHeaderColumn dataField="rm" dataFormat={imageFormatter}>
-            Remove
           </TableHeaderColumn>
         </BootstrapTable>
       </div>

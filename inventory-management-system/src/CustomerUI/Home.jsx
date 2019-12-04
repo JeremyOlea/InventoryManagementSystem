@@ -8,6 +8,7 @@ import Table3 from "../TableCart"
 import { Button } from 'semantic-ui-react';
 import axios from 'axios';
 import { thisTypeAnnotation } from '@babel/types';
+import {Link, BrowserRouter as Router, Route } from 'react-router-dom';
 
 let rmvIMG = "./Images/rmvicon.png"
 
@@ -115,7 +116,9 @@ class Home extends Component {
             </TabPanel>
             <TabPanel className="CartPanel">
               <Table3 data={data3}/>
-              <button type="button" class="btn btn-primary">Checkout</button>
+              <Link to="/cart">
+                <button type="button" class="btn btn-primary">Checkout</button>
+              </Link>
             </TabPanel>
           </Tabs>
           <br></br><br></br><br></br><br></br><br></br><br></br>
