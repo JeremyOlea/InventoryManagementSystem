@@ -9,6 +9,8 @@ import { Button } from 'semantic-ui-react';
 import axios from 'axios';
 import { thisTypeAnnotation } from '@babel/types';
 import {Link, BrowserRouter as Router, Route } from 'react-router-dom';
+import Checkout from '../Layout/Checkout.js';
+
 
 let rmvIMG = "./Images/rmvicon.png"
 
@@ -25,12 +27,12 @@ var data2 = [
 ];
 
 var data3 = [
-  {id: 111, name: 'Air Force 1s', value: '100', quantity: 2, size: 9, rm: rmvIMG},
-  {id: 125, name: 'Balenciaga', value: '500', quantity:  3, size: 9, rm: rmvIMG},
-  {id: 101, name: 'Sketchers', value: '10000', quantity: 1, size: 9, rm: rmvIMG}
+  {id: 111, name: 'Air Force 1s', Price: 100, quantity: 2, size: 9, },
+  {id: 125, name: 'Balenciaga', Price: 500, quantity:  3, size: 9, },
+  {id: 101, name: 'Sketchers', Price: 10000, quantity: 1, size: 9, }
 ];
 
-
+var total=0;
 
 
 class Home extends Component {
@@ -43,10 +45,18 @@ class Home extends Component {
         email: "",
         password: "",
         hello : "",
+        total: 0,
+        showPopup: false
     };
 
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+  }
+
+  togglePopUp(){
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
   }
 
   handleEmailChange(event) {
@@ -69,6 +79,7 @@ class Home extends Component {
       this.setState({
         items : testdata
       })
+      this.sumTotal(data3);
       console.log(testdata);
     }).catch(err => {
       console.log(err);
@@ -85,6 +96,12 @@ class Home extends Component {
     })
   }
 
+  sumTotal(checkoutItems) {
+    for (let i =0; i<checkoutItems.length; i++) {
+      total += checkoutItems[i]["Price"];
+    }
+    this.setState({total: total});
+  }
 
   render(){
     return (
@@ -116,11 +133,17 @@ class Home extends Component {
             </TabPanel>
             <TabPanel className="CartPanel">
               <Table3 data={data3}/>
-              <Link to="/cart">
-                <button type="button" class="btn btn-primary">Checkout</button>
-              </Link>
+              <p>Total: ${this.state.total} </p>
+              <button type="button" class="btn btn-primary" onClick={this.togglePopUp.bind(this)}>Checkout</button>
+              {this.state.showPopup ?
+              <Checkout></Checkout>
+                :null
+              }
+      
+            
             </TabPanel>
           </Tabs>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
           <br></br><br></br><br></br><br></br><br></br><br></br>
           <br></br><br></br><br></br><br></br><br></br><br></br>
           <br></br><br></br><br></br><br></br><br></br><br></br>
