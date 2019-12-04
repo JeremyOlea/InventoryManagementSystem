@@ -24,7 +24,8 @@ class imsdatabase():
         #convert it to JSON
         items =[]
         for row in result:
-            items.append({ 'ItemID' : row[0], 'Name' : row[1], 'Price' : row[2], 'Gender' : row[3], 'Stock' : row[4], 'StoreID' : row[5], 'SupplierID' : row[6]})
+            items.append({ 'ItemID' : row[0], 'Image' : row[1], 'Name' : row[2], 'Price' : row[3], \
+             'Gender' : row[4], 'Stock' : row[5], 'StoreID' : row[6], 'Suppler' : row[7]})
         cursor.close()
         return items
 
@@ -77,30 +78,31 @@ class imsdatabase():
         return items
 
     def addNewUser(self, uid, fname, lname, address, email, password):
-        sql = """INSERT INTO CUSTOMER VALUES ('{0}','{1}','{2}','{3}','{4}','{5}')"""
+        sql = """INSERT INTO USER VALUES ('{0}','{1}','{2}','{3}','{4}','{5}', {6})"""
         cursor = self.conn.cursor()
-        cursor.execute(sql.format(uid,fname, lname, address, email, password))
+        admin = False
+        cursor.execute(sql.format(uid,fname, lname, address, email, password, admin))
         self.conn.commit()
         retval = cursor.lastrowid
         cursor.close()
         return retval;
 
-    def addPurchase(self, uid, itemId, quantity):
+    def addPurchase(self, PurchaseID, ItemID, UserID, DateTime, Quantity):
         sql = """SELECT * FROM PURCHASE WHERE UserID = '{0}' AND ItemID = '{1}'"""
         cursor = self.conn.cursor()
-        cursor.execute(sql.format(uid,itemId))
+        cursor.execute(sql.format(UserID, ItemID))
         result = cursor.fetchone()
 
-        if result[0] == null:
-            sql2 = """INSERT INTO PURCHASE VALUES ('{0}', '{1}', {2})""" # will not work because we need purchaseID and Date
-            cursor.execute(sql2.format(uid, itemId, quantity))
+        if result[0] == None:
+            sql2 = """INSERT INTO PURCHASE VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')"""
+            cursor.execute(sql2.format(PurchaseID, ItemID, UserID, DateTime, Quantity))
             self.conn.commit()
 
         else:
             sql3 = """  UPDATE PURCHASE 
                         SET Quantity = {0} 
-                        WHERE ItemID = {1}"""
-            cursor.execute(sql3.format(result[2] + quantity, itemId))
+                        WHERE ItemID = {1} AND UserID = {2}"""
+            cursor.execute(sql3.format(result[2] + quantity, ItemID, UserID))
             self.conn.commit()
 
         cursor.close()
@@ -118,8 +120,35 @@ class imsdatabase():
         items =[]
         for row in result:
             items.append({'Object' : row}) # I dont know the order -- This will be 3D array
-        return items
-
         cursor.close()
+        return items
+    
+    def getItemById(self, itemId):
+        sql = """   SELECT *
+                    FROM ITEM
+                    WHERE ItemID='{0}'"""
+        cursor = self.conn.cursor()
+        cursor.execute(sql.format(itemId))
+        result = cursor.fetchone()
+
+        item = {'ItemID' : result[0], 'Name' : result[1], 'Price' : result[2], 'Gender': result[3], \
+        'Stock' : result[4], 'StoreID' : result[5], 'SupplierID' : result[6], \
+        'Image' : result[7]}
+        
+        cursor.close()
+        return item
+
+    def validateUser(self, email):
+        sql = """   SELECT UserID
+                    FROM USER
+                    WHERE Email = '{0}' """
+        cursor = self.conn.cursor()
+        row_count = cursor.execute(sql.format(email))
+        result = cursor.fetchone()
+        cursor.close()
+        if row_count == None:
+            return "success"
+        else:
+            return "failed"
 
         

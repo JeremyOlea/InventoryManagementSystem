@@ -8,6 +8,7 @@ import Table3 from "../TableCart"
 import { Button } from 'semantic-ui-react';
 import axios from 'axios';
 import { thisTypeAnnotation } from '@babel/types';
+import History from '../History';
 
 
 var data = [
@@ -63,7 +64,6 @@ class Home extends Component {
       for(let i = 0; i < res.data.length; i++) {
         testdata.push({image: './Images/AF1.jpg', name: res.data[i]['Name'], value: res.data[i]['Price'], id:i});
       }
-      
       this.setState({
         items : testdata
       })
@@ -83,6 +83,11 @@ class Home extends Component {
     })
   }
 
+  goToItem(event) {
+    event.preventDefault();
+    History.push('/Item/300');
+  }
+
 
   render(){
     return (
@@ -93,7 +98,7 @@ class Home extends Component {
             <span className="login">
               <input type="text" placeholder="Email" value={this.state.email} onChange={this.handleEmailChange}></input>
               <input type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange}></input>
-              <Button onClick={this.linkFlask}>Login</Button>
+              <Button onClick={this.goToItem}>Login</Button>
             </span>
           </form>
         <div>

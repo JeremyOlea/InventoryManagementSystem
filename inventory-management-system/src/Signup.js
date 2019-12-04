@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import axios from 'axios';
 import { Button } from 'semantic-ui-react';
+import History from './History';
 
 class Signup extends Component {
     constructor(props){
@@ -137,35 +138,43 @@ class Signup extends Component {
         );
     }
 
+    checkFields() {
+      if(this.state.firstName == '' || this.state.lastName == '' || this.state.address == '' ||
+      this.state.email == '' || this.state.password == '' || this.state.confirmPassword == '') {
+        return false;
+      } else {
+        return true;
+      }
+    }
+
     signUp() {
-        // console.log(this.state.firstName);
-        // console.log(this.state.lastName);
-        // console.log(this.state.address);
-        // console.log(this.state.email);
-        // console.log(this.state.password);
-        // console.log(this.state.confirmPassword);
+      if(!this.checkFields()) {
+        alert("Please fill out all fields");
+      } else if(this.state.password == this.state.confirmPassword) {
         let user = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            address: this.state.address,
-            email: this.state.email,
-            password: this.state.password
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          address: this.state.address,
+          email: this.state.email,
+          password: this.state.password
         };
 
-        // const config = {
-        //   headers: {'Access-Control-Allow-Origin': '*'},
-        // };
-
-        axios.post('http://localhost:5000/registerUser', user)
-        .then(res =>{
-            console.log(res);
-        });
-        // axios.get('http://localhost:5000/HelloWorld')
-        // .then(res => {
-        //     console.log(res);
-        //     alert(res.data['hello']);
-        // })
-        // alert("here");
+        axios.post('http://localhost:5000/validateUser', user)
+        .then(res => {
+          if(res.data == "success") {
+            axios.post('http://localhost:5000/registerUser', user)
+            .then(res =>{
+                console.log(res);
+            }).catch(err => {
+                console.log(err);
+            })
+            
+            History.push('/');
+          } else {
+              alert("User with that Email already exists!");
+          }
+        })
+      }
     }
 }
 

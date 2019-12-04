@@ -58,7 +58,7 @@ class add_purchase(Resource):
     def post(self):
         data = request.get_json()
         db = DatabaseController.imsdatabase()
-        db.addPurchase(data['uid'], data['itemId'], data['quantity'])
+        db.addPurchase(None, data['ItemID'], data['UserID'], data['Date'], data['Quantity'])
         return "success"
 
 class get_purchases(Resource):
@@ -66,6 +66,18 @@ class get_purchases(Resource):
         data = request.get_json()
         db = DatabaseController.imsdatabase()
         return db.getPurchases(data['uid'])
+
+class get_item_by_id(Resource):
+    def post(self):
+        data = request.get_json()
+        db = DatabaseController.imsdatabase()
+        return db.getItemById(data['itemId'])
+
+class validate_user(Resource):
+    def post(self):
+        data = request.get_json()
+        db = DatabaseController.imsdatabase()
+        return db.validateUser(data['email'])
 
 api.add_resource(get_all_items, '/getItems')
 api.add_resource(get_all_tops, '/getTops')
@@ -75,7 +87,9 @@ api.add_resource(get_all_accessories, '/getAccessories')
 api.add_resource(hello_world, '/HelloWorld')
 api.add_resource(register_user, '/registerUser')
 api.add_resource(add_purchase, '/addPurchase')
-api.get_purchases(get_purchases, '/getPurchases')
+api.add_resource(get_purchases, '/getPurchases')
+api.add_resource(get_item_by_id, '/getItemById')
+api.add_resource(validate_user, '/validateUser')
 
 if __name__ == "__main__":
     app.run()
