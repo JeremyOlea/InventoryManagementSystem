@@ -52,7 +52,8 @@ class Home extends Component {
         hello : "",
         total: 0,
         showPopup: false,
-        showCheckoutTable: true
+        showCheckoutTable: true,
+        admin: localStorage.getItem('admin'),
     };
 
     this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -96,6 +97,12 @@ class Home extends Component {
     console.log(localStorage.getItem('login'));
   }
 
+  componentWillMount() {
+    this.setState({
+      user: localStorage.getItem('login'),
+    })
+  }
+
   checkLogin(event){
     event.preventDefault();
 
@@ -118,9 +125,11 @@ class Home extends Component {
             email: res.data[4],
             password: res.data[5],
             admin: res.data[6],
-          }
+          },
+          admin: res.data[6],
         })
         localStorage.setItem('login', this.state.user);
+        localStorage.setItem('admin', this.state.admin);
       }
     })
   }
@@ -167,19 +176,17 @@ class Home extends Component {
   logged() {
     return(
       <div>
-        Welcome, {this.state.user['fname']}
+        Welcome!
         <Button onClick={this.logout}>Logout</Button>
       </div>
     );
   }
 
   render(){
-    if(this.state.user) {
-      if(this.state.user['admin'] == 1) {
+    if(this.state.admin == 1) {
         return (
           <Manager/>
         );
-      }
     }
       return (
         <div className="Home">
