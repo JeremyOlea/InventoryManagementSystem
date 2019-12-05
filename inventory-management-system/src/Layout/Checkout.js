@@ -90,7 +90,7 @@ export default class Checkout extends React.Component {
       axios.post("http://localhost:5000/cartToPurchase", info)
       .then(res => {
         alert(res.data);
-        history.pushState('/');
+        history.push('/');
       }).catch(err => {
         alert(err);
       })
