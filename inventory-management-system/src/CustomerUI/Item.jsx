@@ -25,7 +25,7 @@ class Item extends React.Component {
             item: localStorage.getItem('mydata' + this.props.match.params.itemId),
             loaded: localStorage.getItem('loaded' + this.props.match.params.itemId),
         };
-      }
+    }
 
     UNSAFE_componentWillMount() {
         axios.post("http://localhost:5000/getItemById", {
