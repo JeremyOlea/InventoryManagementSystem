@@ -7,16 +7,33 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #d6dbe6;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: calc(30px + 2vmin);
+  color: black;
 }
 
+.App-subhead{
+  background-color: #d6dbe6;
+  display: flex;
+  text-align: left;
+  font-size: calc(15px + 2vmin);
+  color: black;
+}
+
+.App-form{
+  display: flex;
+  align-items: left;
+  font-size: calc(5px + 2vmin);
+  color: black;
+}
 .App-link {
   color: #09d3ac;
+}
+
+.Manager-table{
+  background-color: #d6dbe6;
+  color: black;
 }

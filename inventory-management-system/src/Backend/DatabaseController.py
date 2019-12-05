@@ -187,3 +187,22 @@ class imsdatabase():
             self.conn.commit()
         cursor.close()
         return
+    def checkLogin(self, email, password):
+        sql = """SELECT  * FROM USER WHERE Email = '{0}' AND Password = '{1}'"""
+        cursor = self.conn.cursor()
+        cursor.execute(sql.format(email, password))
+        retval = cursor.fetchone()
+        cursor.close()
+        return retval
+
+    def restock(self, itemID, amount):
+        sql = """UPDATE ITEM SET Stock = Stock + '{0}' WHERE ItemID = '{1}';"""
+        cursor = self.conn.cursor()
+        cursor.execute(sql.format(amount, itemID))
+        self.conn.commit()
+        cursor.close()
+        return
+
+
+    # def getAllPurchases(self):
+    #     #we need user table

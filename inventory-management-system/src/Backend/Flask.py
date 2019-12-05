@@ -90,6 +90,19 @@ class get_cart(Resource):
         data = request.get_json()
         db = DatabaseController.imsdatabase()
         return db.addAllCart(data['ItemID'], data['UserID'])
+class check_login(Resource):
+    def post(self):
+        db = DatabaseController.imsdatabase()
+        data = request.get_json()
+        retval = db.checkLogin(data['email'], data['password'])
+        return retval;
+
+class restock_item(Resource):
+    def post(self):
+        db = DatabaseController.imsdatabase()
+        data = request.get_json()
+        db.restock(data['id'], data['amount'])
+        return
 
 api.add_resource(get_all_items, '/getItems')
 api.add_resource(get_all_tops, '/getTops')
@@ -104,6 +117,8 @@ api.add_resource(get_item_by_id, '/getItemById')
 api.add_resource(validate_user, '/validateUser')
 api.add_resource(add_to_cart, '/addToCart')
 api.add_resource(get_cart, '/getAllCart')
+api.add_resource(check_login, '/checkLogin')
+api.add_resource(restock_item, '/restock')
 
 if __name__ == "__main__":
     app.run()

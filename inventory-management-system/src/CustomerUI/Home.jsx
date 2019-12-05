@@ -40,7 +40,9 @@ var total=0;
 class Home extends Component {
   constructor(props){
     super(props);
+
     this.state = {
+        user: {},
         items: [],
         purchases: ["Item 1", "Item 2", "Item 3"],
         cart: (0),
@@ -54,6 +56,7 @@ class Home extends Component {
 
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.checkLogin = this.checkLogin.bind(this);
   }
 
   togglePopUp(){
@@ -93,12 +96,43 @@ class Home extends Component {
   }
 
 
-  linkFlask(event) {
+  // linkFlask(event) {
+  //   event.preventDefault();
+  //   axios.get('http://localhost:5000/HelloWorld')
+  //   .then(res => {
+  //       console.log(res);
+  //       alert(res.data['hello']);
+  //   })
+  // }
+  
+  checkLogin(event){
     event.preventDefault();
-    axios.get('http://localhost:5000/HelloWorld')
+
+    let loginCred = {
+        email: this.state.email,
+        password: this.state.password
+    };
+
+    console.log(loginCred);
+
+    axios.post('http://localhost:5000/checkLogin', loginCred)
     .then(res => {
-        console.log(res);
-        alert(res.data['hello']);
+      console.log(res);
+      if(res.data == null){
+        alert("Wrong Login Credentials!");
+      } else {
+        this.setState({
+          user: {
+            userID: res.data['UserID'],
+            fname: res.data['Fname'],
+            lname: res.data['Lname'],
+            address: res.data['Address'],
+            email: res.data['email'],
+            password: res.data['password'],
+            admin: res.data['Admin'],
+          }
+        })
+      }
     })
   }
 
@@ -118,12 +152,14 @@ class Home extends Component {
     return (
       <div className="Home">
         <div>
-          <form>
-            Shop Name
+          <h1 className="App-header">
+            Shop Name<br></br>
+          </h1>
+          <form>  
             <span className="login">
               <input type="text" placeholder="Email" value={this.state.email} onChange={this.handleEmailChange}></input>
               <input type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange}></input>
-              <Button onClick={this.goToItem}>Login</Button>
+              <Button onClick={this.checkLogin}>Login</Button>
             </span>
           </form>
         <div>
