@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import Item from './CustomerUI/Item';
 import * as serviceWorker from './serviceWorker';
 import Signup from './Signup';
 import History from './History';
-import NavBar from './Layout/Navbar';
 import Checkout from './Layout/Checkout';
 
 // If you want your app to work offline and load faster, you can change
