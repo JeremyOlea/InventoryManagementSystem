@@ -6,6 +6,7 @@ import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import AddTops from './AddTops.js';
 import history from './History';
+import moment from 'moment';
 
 class Manager extends Component {
   constructor(props){
@@ -18,12 +19,14 @@ class Manager extends Component {
       restockItemID: '',
       restockAmount: '',
       needRestock: [],
+      restockHistory: [],
     };
 
     this.handleRestock = this.handleRestock.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.handleRestockIDChange = this.handleRestockIDChange.bind(this);
     this.handleRestockAmountChange = this.handleRestockAmountChange.bind(this);
+    this.getHistory = this.getHistory.bind(this);
   }
 
   handleSort = (clickedColumn) => () => {
@@ -85,7 +88,8 @@ class Manager extends Component {
 
     let restockParams = {
       id: this.state.restockItemID,
-      amount: this.state.restockAmount
+      amount: this.state.restockAmount,
+      date: moment()
     };
     axios.post('http://localhost:5000/restock', restockParams)
     .then(res => {
@@ -102,8 +106,28 @@ class Manager extends Component {
     history.push('/');
   }
 
+  getHistory(event){
+    event.preventDefault();
+    axios.get('http://localhost:5000/getHistory')
+    .then(res => {
+      console.log(res);
+      let testdata = [];
+      for(let i = 0; i < res.data.length; i++) {
+        testdata.push({orderid: res.data[i]['OrderID'], date: res.data[i]['Date'], quantity: res.data[i]['Quantity'], itemid: res.data[i]['ItemID'], supplierid: res.data[i]['SupplierID']});
+
+      }
+      
+      this.setState({
+        restockHistory : testdata
+      })
+      console.log(testdata);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
   render() {
-    const { column, items, direction, needRestock } = this.state
+    const { column, items, direction, needRestock, restockHistory } = this.state
 
     return (
       <div className="Manager-table">
@@ -122,6 +146,7 @@ class Manager extends Component {
               <Tab>Manage Items</Tab>
               {/* <Tab>Add Item</Tab> */}
               <Tab>Low Stock Items</Tab>
+              <Tab>Restock History</Tab>
             </TabList>
           </center>
           <TabPanel className="ManagePanel">
@@ -222,6 +247,47 @@ class Manager extends Component {
                 ))}
               </Table.Body>
             </Table>
+          </TabPanel>
+          <TabPanel className="RestockHistory">
+            <h1 className="App-subhead">
+              Restock History:
+            </h1>
+            <center>
+              <Button onClick={this.getHistory}>Get Restock History</Button>
+            </center>
+            <Table sortable celled fixed>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>
+                    Order ID
+                  </Table.HeaderCell>
+                  <Table.HeaderCell>
+                    Date
+                  </Table.HeaderCell>
+                  <Table.HeaderCell>
+                    Quantity
+                  </Table.HeaderCell>
+                  <Table.HeaderCell>
+                    Item ID
+                  </Table.HeaderCell>
+                  <Table.HeaderCell>
+                    Supplier ID
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {_.map(restockHistory, ({ orderid, date, quantity, itemid, supplierid }) => (
+                  <Table.Row key={orderid}>
+                    <Table.Cell>{orderid}</Table.Cell>
+                    <Table.Cell>{date}</Table.Cell>
+                    <Table.Cell>{quantity}</Table.Cell>
+                    <Table.Cell>{itemid}</Table.Cell>
+                    <Table.Cell>{supplierid}</Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
+          </TabPanel>
             {/* <Tabs>
               <center>
                 <TabList>
@@ -234,7 +300,7 @@ class Manager extends Component {
               <TabPanel className="AddTops">
               </TabPanel>
             </Tabs> */}
-          </TabPanel>
+          
         </Tabs>
         <br></br><br></br><br></br><br></br><br></br><br></br>
         <br></br><br></br><br></br><br></br><br></br><br></br>

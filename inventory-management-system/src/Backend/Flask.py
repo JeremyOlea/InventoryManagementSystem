@@ -102,7 +102,7 @@ class restock_item(Resource):
     def post(self):
         db = DatabaseController.imsdatabase()
         data = request.get_json()
-        db.restock(data['id'], data['amount'])
+        db.restock(data['id'], data['amount'], data['date'])
         return
 
 class cart_to_purchase(Resource):
@@ -123,6 +123,11 @@ class delete_from_cart(Resource):
         db.deleteCartItem(data['ItemID'], data['UserID'])
         return
 
+class get_history(Resource):
+    def get(self):
+        db = DatabaseController.imsdatabase()
+        return db.getHistory()
+
 api.add_resource(get_all_items, '/getItems')
 api.add_resource(get_all_tops, '/getTops')
 api.add_resource(get_all_bottoms, '/getBottoms')
@@ -140,6 +145,7 @@ api.add_resource(check_login, '/checkLogin')
 api.add_resource(restock_item, '/restock')
 api.add_resource(cart_to_purchase, '/cartToPurchase')
 api.add_resource(delete_from_cart, '/deleteFromCart')
+api.add_resource(get_history, '/getHistory')
 
 if __name__ == "__main__":
     app.run()

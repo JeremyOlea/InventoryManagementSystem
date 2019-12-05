@@ -196,10 +196,20 @@ class imsdatabase():
         cursor.close()
         return retval
 
-    def restock(self, itemID, amount):
+    def restock(self, itemID, amount, date):
         sql = """UPDATE ITEM SET Stock = Stock + '{0}' WHERE ItemID = '{1}';"""
         cursor = self.conn.cursor()
         cursor.execute(sql.format(amount, itemID))
+        self.conn.commit()
+
+        sql2 = """ SELECT * FROM ITEM WHERE ItemID = '{0}'; """
+        cursor.execute(sql2.format(itemID))
+        result = cursor.fetchone()
+        storeid = result[5]
+        suppid = result[6]
+        
+        sql3 = """ INSERT INTO RESTOCKORDER VALUES(null, '{0}', '{1}', '{2}', '{3}', '{4}'); """
+        cursor.execute(sql3.format(date, amount, itemID, suppid, storeid))
         self.conn.commit()
         cursor.close()
         return
@@ -226,6 +236,17 @@ class imsdatabase():
         cursor.close()
         return
 
+    def getHistory(self):
+        sql = """ SELECT * FROM RESTOCKORDER """
+        cursor = self.conn.cursor()
+        cursor.execute(sql)
+        result = cursor.fetchall()
+
+        history = []
+        for row in result:
+            history.append({'OrderID': row[0], 'Date': row[1], 'Quantity': row[2], 'ItemID': row[3], 'SupplierID': row[4], 'StoreID': row[5]})
+        cursor.close()
+        return history
 
     # def getAllPurchases(self):
     #     #we need user table
