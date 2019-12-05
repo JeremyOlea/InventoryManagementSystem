@@ -42,10 +42,10 @@ class Home extends Component {
     super(props);
 
     this.state = {
-        user: {},
+        user: localStorage.getItem('login'),
         items: [],
-        purchases: ["Item 1", "Item 2", "Item 3"],
-        cart: (0),
+        purchases: [],
+        cart: [],
         email: "",
         password: "",
         hello : "",
@@ -80,7 +80,6 @@ class Home extends Component {
   componentDidMount() {
     axios.get('http://localhost:5000/getItems')
     .then(res => {
-      console.log(res);
       let testdata = [];
       for(let i = 0; i < res.data.length; i++) {
         testdata.push({image: './Images/AF1.jpg', name: res.data[i]['Name'], value: res.data[i]['Price'], id: res.data[i]['ItemID']});
@@ -89,22 +88,13 @@ class Home extends Component {
         items : testdata,
       })
       this.sumTotal(data3);
-      console.log(testdata);
     }).catch(err => {
       console.log(err);
     })
+
+    console.log(localStorage.getItem('login'));
   }
 
-
-  // linkFlask(event) {
-  //   event.preventDefault();
-  //   axios.get('http://localhost:5000/HelloWorld')
-  //   .then(res => {
-  //       console.log(res);
-  //       alert(res.data['hello']);
-  //   })
-  // }
-  
   checkLogin(event){
     event.preventDefault();
 
@@ -113,25 +103,23 @@ class Home extends Component {
         password: this.state.password
     };
 
-    console.log(loginCred);
-
     axios.post('http://localhost:5000/checkLogin', loginCred)
     .then(res => {
-      console.log(res);
       if(res.data == null){
         alert("Wrong Login Credentials!");
       } else {
         this.setState({
           user: {
-            userID: res.data['UserID'],
-            fname: res.data['Fname'],
-            lname: res.data['Lname'],
-            address: res.data['Address'],
-            email: res.data['email'],
-            password: res.data['password'],
-            admin: res.data['Admin'],
+            userID: res.data[0],
+            fname: res.data[1],
+            lname: res.data[2],
+            address: res.data[3],
+            email: res.data[4],
+            password: res.data[5],
+            admin: res.data[6],
           }
         })
+        localStorage.setItem('login', this.state.user);
       }
     })
   }
@@ -148,6 +136,42 @@ class Home extends Component {
     this.setState({total: total});
   }
 
+  logout() {
+    localStorage.clear();
+    this.setState({
+      user: localStorage.getItem('login'),
+      items: [],
+      purchases: [],
+      cart: [],
+      email: "",
+      password: "",
+      hello : "",
+      total: 0,
+      showPopup: false,
+      showCheckoutTable: true
+    })
+    alert('logged out');
+  }
+
+  notLogged() {
+    return(
+      <span className="login">
+        <input type="text" placeholder="Email" value={this.state.email} onChange={this.handleEmailChange}></input>
+        <input type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange}></input>
+        <Button onClick={this.checkLogin}>Login</Button>
+      </span>
+    );
+  }
+
+  logged() {
+    return(
+      <div>
+        Welcome, {this.state.user['fname']}
+        <Button onClick={this.logout}>Logout</Button>
+      </div>
+    );
+  }
+
   render(){
     return (
       <div className="Home">
@@ -155,12 +179,8 @@ class Home extends Component {
           <h1 className="App-header">
             Shop Name<br></br>
           </h1>
-          <form>  
-            <span className="login">
-              <input type="text" placeholder="Email" value={this.state.email} onChange={this.handleEmailChange}></input>
-              <input type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange}></input>
-              <Button onClick={this.checkLogin}>Login</Button>
-            </span>
+          <form> 
+              {this.state.user ? this.logged() : this.notLogged()}
           </form>
         <div>
         </div>
