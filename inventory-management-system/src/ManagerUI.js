@@ -56,7 +56,7 @@ class Manager extends Component {
       let lowStock = [];
       for(let i = 0; i < res.data.length; i++) {
         testdata.push({image: './Images/AF1.jpg', itemid: res.data[i]['ItemID'], name: res.data[i]['Name'], value: res.data[i]['Price'], stock: res.data[i]['Stock']});
-        if(res.data[i]['Stock'] < 235)(
+        if(res.data[i]['Stock'] < 150)(
           lowStock.push({image: './Images/AF1.jpg', itemid: res.data[i]['ItemID'], name: res.data[i]['Name'], value: res.data[i]['Price'], stock: res.data[i]['Stock']})
         )
       }
