@@ -90,6 +90,7 @@ class get_cart(Resource):
         data = request.get_json()
         db = DatabaseController.imsdatabase()
         return db.addAllCart(data['ItemID'], data['UserID'])
+        
 class check_login(Resource):
     def post(self):
         db = DatabaseController.imsdatabase()
