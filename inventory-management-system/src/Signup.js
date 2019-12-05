@@ -131,9 +131,9 @@ class Signup extends Component {
               </MDBCol>
             </MDBRow>
           </MDBContainer>
-          <Button color="unique" type="submit" onClick={() => this.signUp()}>
+          {/* <Button color="unique" type="submit" onClick={() => this.signUp()}>
                       Register
-                    </Button>
+                    </Button> */}
           </div>
         );
     }

@@ -12,6 +12,7 @@ import History from '../History';
 import {Link, BrowserRouter as Router, Route } from 'react-router-dom';
 import Checkout from '../Layout/Checkout.js';
 import Manager from '../ManagerUI'
+import history from '../History';
 
 
 let rmvIMG = "./Images/rmvicon.png"
@@ -201,12 +202,17 @@ class Home extends Component {
     alert('logged out');
   }
 
+  goToSignup() {
+    history.push('/signup');
+  }
+
   notLogged() {
     return(
       <span className="Light">
         <input type="text" placeholder="Email" value={this.state.email} onChange={this.handleEmailChange}></input>
         <input type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange}></input>
         <Button onClick={this.checkLogin}>Login</Button>
+        <Button onClick={() => {this.goToSignup()}}>Sign Up</Button>
       </span>
     );
   }
@@ -218,6 +224,10 @@ class Home extends Component {
         <Button onClick={this.logout}>Logout</Button> 
       </div>
     );
+  }
+
+  goToCheckout() {
+    history.push('/cart');
   }
 
   render(){
@@ -257,9 +267,9 @@ class Home extends Component {
               <Table3 data={this.state.cart}>
             
               </Table3>
-              <Link to="/cart">
-                <button type="button" class="btn btn-primary">Checkout</button>
-              </Link>
+              <div>
+                <button type="button" class="btn btn-primary" onClick={() => {this.goToCheckout()}}>Checkout</button>
+              </div>
             </TabPanel>
           </Tabs>
           <br></br><br></br><br></br><br></br><br></br><br></br>
