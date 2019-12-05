@@ -124,7 +124,7 @@ class Home extends Component {
             address: res.data[3],
             email: res.data[4],
             password: res.data[5],
-            admin: res.data[6],
+            admin: res.data[6],  
           },
           admin: res.data[6],
         })
@@ -177,7 +177,7 @@ class Home extends Component {
     return(
       <div>
         Welcome!
-        <Button onClick={this.logout}>Logout</Button>
+        <Button onClick={this.logout}>Logout</Button> 
       </div>
     );
   }
@@ -185,7 +185,7 @@ class Home extends Component {
   render(){
     if(this.state.admin == 1) {
         return (
-          <Manager/>
+          <Manager/> 
         );
     }
       return (
