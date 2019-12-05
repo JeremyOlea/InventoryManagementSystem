@@ -94,7 +94,44 @@ class Home extends Component {
       console.log(err);
     })
 
-    console.log(localStorage.getItem('login'));
+    
+    if(localStorage.getItem("loginID") != null) {
+      let userCred = {
+        uid:  localStorage.getItem("loginID"),
+      }
+      axios.post('http://localhost:5000/getPurchases', userCred)
+      .then(res => {
+        let purchasedItems = [];
+        for(let i = 0; i < res.data.length; i++) {
+          purchasedItems.push({image: './Images/AF1.jpg', name: res.data[i]['Name'],
+          value: res.data[i]['Price'], date: res.data[i]['Date'], id: res.data[i]['ItemID']});
+        }
+
+        this.setState({
+          purchases: purchasedItems,
+        })
+      }).catch(err => {
+        console.log(err);
+      })
+
+
+      axios.post('http://localhost:5000/getAllCart', userCred)
+      .then(res => {
+        console.log(res);
+        let cartItems = [];
+        for(let i = 0; i < res.data.length; i++) {
+          cartItems.push({id: res.data[i]['ItemID'], name: res.data[i]['Name'],
+          value: res.data[i]['Price'], quantity: res.data[i]['Quantity'], size: 9});
+        }
+
+        this.setState({
+          cart: cartItems,
+        })
+      }).catch(err => {
+        console.log(err);
+      })
+    }
+
   }
 
   componentWillMount() {
@@ -213,11 +250,11 @@ class Home extends Component {
 
             </TabPanel>
             <TabPanel className="Light">
-              <Table2 data={data2}/>
+              <Table2 data={this.state.purchases}/>
             </TabPanel>
             <TabPanel className="Light">
               
-              <Table3 data={data3}>
+              <Table3 data={this.state.cart}>
             
               </Table3>
               <Link to="/cart">

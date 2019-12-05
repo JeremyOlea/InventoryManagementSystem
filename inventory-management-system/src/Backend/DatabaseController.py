@@ -87,23 +87,24 @@ class imsdatabase():
         cursor.close()
         return retval;
 
+    #new purchases should be new tuple 
     def addPurchase(self, PurchaseID, ItemID, UserID, DateTime, Quantity):
-        sql = """SELECT * FROM PURCHASE WHERE UserID = '{0}' AND ItemID = '{1}'"""
+        # sql = """SELECT * FROM PURCHASE WHERE UserID = '{0}' AND ItemID = '{1}'"""
         cursor = self.conn.cursor()
-        cursor.execute(sql.format(UserID, ItemID))
-        result = cursor.fetchone()
+        # cursor.execute(sql.format(UserID, ItemID))
+        # result = cursor.fetchone()
 
-        if result == None:
-            sql2 = """INSERT INTO PURCHASE VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')"""
-            cursor.execute(sql2.format(PurchaseID, ItemID, UserID, DateTime, Quantity))
-            self.conn.commit()
+        # if result == None:
+        sql2 = """INSERT INTO PURCHASE VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')"""
+        cursor.execute(sql2.format(PurchaseID, ItemID, UserID, DateTime, Quantity))
+        self.conn.commit()
 
-        else:
-            sql3 = """  UPDATE PURCHASE 
-                        SET Quantity = {0} 
-                        WHERE ItemID = {1} AND UserID = {2}"""
-            cursor.execute(sql3.format(result[2] + quantity, ItemID, UserID))
-            self.conn.commit()
+        # else:
+        #     sql3 = """  UPDATE PURCHASE 
+        #                 SET Quantity = {0} 
+        #                 WHERE ItemID = {1} AND UserID = {2}"""
+        #     cursor.execute(sql3.format(result[2] + quantity, ItemID, UserID))
+        #     self.conn.commit()
 
         cursor.close()
         return "Success"
@@ -119,7 +120,7 @@ class imsdatabase():
         
         items =[]
         for row in result:
-            items.append({'Object' : row}) # I dont know the order -- This will be 3D array
+            items.append({'Image': row[12], 'Name': row[6], 'Price': row[7], 'Date': row[3], 'ItemID': row[1]}) # I dont know the order -- This will be 3D array
         cursor.close()
         return items
     
@@ -151,19 +152,18 @@ class imsdatabase():
         else:
             return "failed"
 
-    def getAllCart(self, ItemID, UserID):
+    def getAllCart(self, UserID):
         sql = """   SELECT *
                     FROM ITEM as I, CART as C
-                    WHERE   C.ItemID = {0} AND C.ItemID = I.ItemID
-                            AND C.UserID = {1}"""
+                    WHERE C.ItemID = I.ItemID AND C.UserID = {0}"""
         cursor = self.conn.cursor()
-        row_count = cursor.execute(sql.format(ItemID, UserID))
+        cursor.execute(sql.format(UserID))
         result = cursor.fetchall()
 
         items = []
         for row in result:
             items.append({ 'ItemID' : row[0], 'Name' : row[1], 'Price' : row[2], 'Gender' : row[3], \
-             'Stock' : row[4], 'StoreID' : row[5], 'SupplierID' : row[6], 'Image' : row[7]})
+             'Stock' : row[4], 'StoreID' : row[5], 'SupplierID' : row[6], 'Image' : row[7], 'Quantity': row[10]})
         cursor.close()
         return items
 
@@ -200,6 +200,28 @@ class imsdatabase():
         sql = """UPDATE ITEM SET Stock = Stock + '{0}' WHERE ItemID = '{1}';"""
         cursor = self.conn.cursor()
         cursor.execute(sql.format(amount, itemID))
+        self.conn.commit()
+        cursor.close()
+        return
+
+    #Adding CART to PURCHASE
+    def cartByUser(self, UserID):
+        sql = """ SELECT * FROM CART WHERE UserID = '{0}' """
+        cursor = self.conn.cursor()
+        cursor.execute(sql.format(UserID))
+        result = fetchall()
+
+        items = []
+        for row in result:
+            items.append({'ItemID': row[0], 'UserID': row[1], 'Quantity': row[2]}) #assuming [ItemID, UserID, Quantity]
+        
+        cursor.close()
+        return items # call add to purchase after
+    
+    def deleteCartItem(self, ItemID, UserID):
+        sql = """   DELETE FROM CART WHERE ItemID = '{0}' AND UserID = '{1}' """
+        cursor = self.conn.cursor()
+        cursor.execute(sql.format(ItemID, UserID))
         self.conn.commit()
         cursor.close()
         return

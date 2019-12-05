@@ -89,7 +89,7 @@ class get_cart(Resource):
     def post(self):
         data = request.get_json()
         db = DatabaseController.imsdatabase()
-        return db.addAllCart(data['ItemID'], data['UserID'])
+        return db.getAllCart(data['uid'])
         
 class check_login(Resource):
     def post(self):
@@ -103,6 +103,24 @@ class restock_item(Resource):
         db = DatabaseController.imsdatabase()
         data = request.get_json()
         db.restock(data['id'], data['amount'])
+        return
+
+class cart_to_purchase(Resource):
+    def post(self):
+        db = DatabaseController.imsdatabase()
+        data = request.get_json()
+        result = db.cartByUser(data['UserID'])
+
+        for row in result:
+            db.addPurchase(None, row['ItemID'], row['UserID'], data['DateTime'], row['Quantity'])
+
+        return "success"
+
+class delete_from_cart(Resource):
+    def post(self):
+        db = DatabaseController.imsdatabase()
+        data = request.get_json()
+        db.deleteCartItem(data['ItemID'], data['UserID'])
         return
 
 api.add_resource(get_all_items, '/getItems')
@@ -120,6 +138,8 @@ api.add_resource(add_to_cart, '/addToCart')
 api.add_resource(get_cart, '/getAllCart')
 api.add_resource(check_login, '/checkLogin')
 api.add_resource(restock_item, '/restock')
+api.add_resource(cart_to_purchase, '/cartToPurchase')
+api.add_resource(delete_from_cart, '/deleteFromCart')
 
 if __name__ == "__main__":
     app.run()

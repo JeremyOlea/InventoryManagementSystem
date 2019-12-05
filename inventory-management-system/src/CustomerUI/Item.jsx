@@ -61,7 +61,7 @@ class Item extends React.Component {
         };
         axios.post("http://localhost:5000/addPurchase", item)
         .then(res => {
-            alert(res);
+            alert("Item Bought!");
         }).catch(err => {
             alert(err);
         })
@@ -79,7 +79,7 @@ class Item extends React.Component {
             }
             axios.post("http://localhost:5000/addToCart", item)
             .then(res => {
-                console.log(res);
+                alert("Item added to cart!");
             }) .catch(err => {
                 console.log(err);
             });
@@ -95,8 +95,8 @@ class Item extends React.Component {
             <div>
                 <div className="sidenav">
                     <Link to="/">Home</Link>
-                    <a onClick={() => {this.addCart()}}>Add To Cart</a>
-                    <a onClick={() => {this.purchaseItem()}}>Checkout</a>
+                    <a href="#" onClick={() => {this.addCart()}}>Add To Cart</a>
+                    <a href="#" onClick={() => {this.purchaseItem()}}>Checkout</a>
                 </div>
                 <div className="content">
                     <p>Air Force 1s</p>
@@ -108,18 +108,11 @@ class Item extends React.Component {
                 </div>
                 <div className = "Info">
                 <br></br><br></br><br></br><br></br>
-                Size <emsp></emsp>
+                Quantity <emsp></emsp>
                 <select className="drop-down-menu">
-                        <option selected="selected" value="one">Small</option>
-                        <option value="two">Medium</option>
-                        <option value="three">Large</option>
-                </select>
-                <br></br>
-                Quantity
-                <select className="drop-down-menu">
-                        <option selected="selected" value="one">Small</option>
-                        <option value="two">Medium</option>
-                        <option value="three">Large</option>
+                        <option selected="selected" value="one">1</option>
+                        <option value="two">2</option>
+                        <option value="three">3</option>
                     </select>
                 </div>
             </div>
