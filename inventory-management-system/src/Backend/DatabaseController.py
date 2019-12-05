@@ -93,7 +93,7 @@ class imsdatabase():
         cursor.execute(sql.format(UserID, ItemID))
         result = cursor.fetchone()
 
-        if result[0] == None:
+        if result == None:
             sql2 = """INSERT INTO PURCHASE VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')"""
             cursor.execute(sql2.format(PurchaseID, ItemID, UserID, DateTime, Quantity))
             self.conn.commit()
@@ -168,25 +168,26 @@ class imsdatabase():
         return items
 
     def addToCart(self, ItemID, UserID, Quantity):
-        sql = """   SELECT ItemID
+        sql = """   SELECT Quantity
                     FROM CART
-                    WHERE ItemID = '{0}' """
+                    WHERE ItemID = '{0}' AND UserID = '{1}' """
         cursor = self.conn.cursor()
-        row_count = cursor.execute(sql.format(ItemID))
+        cursor.execute(sql.format(ItemID, UserID))
         result = cursor.fetchone()
 
-        if row_count == None:
-            sql2 = """  INSERT INTO CART VALUES ({0}, {1}, {2}) """
+        if result == None:
+            sql2 = """  INSERT INTO CART VALUES ('{0}', '{1}', '{2}') """
             cursor.execute(sql2.format(ItemID, UserID, Quantity))
             self.conn.commit()
         else:
             sql3 = """  UPDATE CART
-                        SET Quantity = {0}
-                        WHERE ItemID = {1} AND UserID = {2} """
-            cursor.execute(sql3.format(result[2] + Quantity, ItemID, UserID))
+                        SET Quantity = '{0}'
+                        WHERE ItemID = '{1}' AND UserID = '{2}' """
+            cursor.execute(sql3.format(result[0] + Quantity, ItemID, UserID))
             self.conn.commit()
         cursor.close()
-        return
+        return "success"
+
     def checkLogin(self, email, password):
         sql = """SELECT  * FROM USER WHERE Email = '{0}' AND Password = '{1}'"""
         cursor = self.conn.cursor()

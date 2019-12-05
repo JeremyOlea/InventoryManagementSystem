@@ -128,6 +128,7 @@ class Home extends Component {
           },
           admin: res.data[6],
         })
+        localStorage.setItem('loginID', res.data[0]);
         localStorage.setItem('login', this.state.user);
         localStorage.setItem('admin', this.state.admin);
       }
