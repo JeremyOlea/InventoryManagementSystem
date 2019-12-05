@@ -183,7 +183,7 @@ class Home extends Component {
   }
 
   render(){
-    if(this.state.admin == 1) {
+    if(this.state.admin === 1) {
         return (
           <Manager/> 
         );
@@ -206,7 +206,6 @@ class Home extends Component {
                 <Tab>Cart</Tab>
               </TabList>
             </center>
-
             <TabPanel className="Light">
               <Table1 data={this.state.items}/>
 
