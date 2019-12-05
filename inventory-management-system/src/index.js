@@ -7,6 +7,8 @@ import Item from './CustomerUI/Item';
 import * as serviceWorker from './serviceWorker';
 import Signup from './Signup';
 import History from './History';
+import NavBar from './Layout/Navbar';
+import Checkout from './Layout/Checkout';
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
@@ -20,6 +22,7 @@ const routing = (
             <Route exact path="/" component={App} />
             <Route path="/Item/:itemId" component={Item}/>
             <Route path="/signup" component={Signup}/>
+            <Route path="/cart" component={Checkout}/>
         </div>
     </Router>
 )

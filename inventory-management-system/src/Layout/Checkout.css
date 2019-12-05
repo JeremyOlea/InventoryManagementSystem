@@ -1,39 +1,5 @@
-.Home {
-    text-align: center;
-    background-color: #282c34;
-    color: white;
-    display: flex;
-}
-
-.Home-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
-
-.HomePanel {
-
-}
-
-.PurchasesPanel {
-    
-}
-
-.CartPanel {
-    
-}
-
-.button {
-    padding: 20;
-}
-
 body {
-    background: #f28a4b;
+    background: #242944;
     width: 100%;
     font-family: 'Raleway', sans-serif;
     letter-spacing: 2px;

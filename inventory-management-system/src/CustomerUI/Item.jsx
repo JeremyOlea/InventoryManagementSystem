@@ -58,8 +58,8 @@ class Item extends React.Component {
             <div>
                 <div className="sidenav">
                     <Link to="/">Home</Link>
-                    <a href="">Add To Cart</a>
-                    <a href="" onClick={this.purchaseItem}>Checkout</a>
+                    <Link to='/'>Add To Cart</Link>
+                    <Link to='/cart'>Checkout</Link>
                 </div>
                 <div className="content">
                     <p>Air Force 1s</p>
