@@ -5,6 +5,7 @@ import axios from 'axios';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import AddTops from './AddTops.js';
+import history from './History';
 
 class Manager extends Component {
   constructor(props){
@@ -96,7 +97,9 @@ class Manager extends Component {
   }
 
   handleLogout(event){
-
+    event.preventDefault();
+    localStorage.clear();
+    history.push('/');
   }
 
   render() {

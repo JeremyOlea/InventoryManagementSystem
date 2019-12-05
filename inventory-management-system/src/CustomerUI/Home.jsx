@@ -11,6 +11,7 @@ import { thisTypeAnnotation } from '@babel/types';
 import History from '../History';
 import {Link, BrowserRouter as Router, Route } from 'react-router-dom';
 import Checkout from '../Layout/Checkout.js';
+import Manager from '../ManagerUI'
 
 
 let rmvIMG = "./Images/rmvicon.png"
@@ -51,7 +52,8 @@ class Home extends Component {
         hello : "",
         total: 0,
         showPopup: false,
-        showCheckoutTable: true
+        showCheckoutTable: true,
+        admin: localStorage.getItem('admin'),
     };
 
     this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -95,6 +97,12 @@ class Home extends Component {
     console.log(localStorage.getItem('login'));
   }
 
+  componentWillMount() {
+    this.setState({
+      user: localStorage.getItem('login'),
+    })
+  }
+
   checkLogin(event){
     event.preventDefault();
 
@@ -117,9 +125,11 @@ class Home extends Component {
             email: res.data[4],
             password: res.data[5],
             admin: res.data[6],
-          }
+          },
+          admin: res.data[6],
         })
         localStorage.setItem('login', this.state.user);
+        localStorage.setItem('admin', this.state.admin);
       }
     })
   }
@@ -166,7 +176,7 @@ class Home extends Component {
   logged() {
     return(
       <div>
-        Welcome, {this.state.user['fname']}
+        Welcome!
         <Button onClick={this.logout}>Logout</Button>
       </div>
     );
@@ -230,10 +240,51 @@ class Home extends Component {
           <br></br><br></br><br></br><br></br><br></br><br></br>
           <br></br><br></br><br></br><br></br><br></br><br></br>
           <br></br><br></br><br></br><br></br><br></br><br></br>
+          {/* <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" /> */}
+            <Tabs defaultIndex={0}>
+              <TabList>
+                <Tab>Home</Tab>
+                <Tab>Purchases</Tab>
+                <Tab>Cart</Tab>
+              </TabList>
+              <TabPanel className="HomePanel">
+                <Table1 data={this.state.items}/>
+
+              </TabPanel>
+              <TabPanel className="PurchasesPanel">
+                <Table2 data={data2}/>
+              </TabPanel>
+              <TabPanel className="CartPanel">
+                
+                <Table3 data={data3}>
+              
+                </Table3>
+                <Link to="/cart">
+                <button type="button" class="btn btn-primary" >Checkout</button>
+                </Link>
+              </TabPanel>
+            </Tabs>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
           </div>
-      </div>
-    );
-  }
+        </div>
+      );
+    }
 
 }
 export default Home;
