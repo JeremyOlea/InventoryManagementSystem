@@ -85,7 +85,7 @@ class Home extends Component {
     .then(res => {
       let testdata = [];
       for(let i = 0; i < res.data.length; i++) {
-        testdata.push({image: './Images/AF1.jpg', name: res.data[i]['Name'], value: res.data[i]['Price'], id: res.data[i]['ItemID']});
+        testdata.push({image: res.data[i]['Image'], name: res.data[i]['Name'], value: res.data[i]['Price'], id: res.data[i]['ItemID']});
       }
       this.setState({
         items : testdata,
@@ -104,7 +104,7 @@ class Home extends Component {
       .then(res => {
         let purchasedItems = [];
         for(let i = 0; i < res.data.length; i++) {
-          purchasedItems.push({image: './Images/AF1.jpg', name: res.data[i]['Name'],
+          purchasedItems.push({image: res.data[i]['Image'], name: res.data[i]['Name'],
           value: res.data[i]['Price'], date: res.data[i]['Date'], id: res.data[i]['ItemID']});
         }
 

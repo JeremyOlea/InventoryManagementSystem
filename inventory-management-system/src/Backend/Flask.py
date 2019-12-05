@@ -107,12 +107,14 @@ class restock_item(Resource):
 
 class cart_to_purchase(Resource):
     def post(self):
-        db = DatabaseController.imsdatabase()
         data = request.get_json()
+        db = DatabaseController.imsdatabase()
         result = db.cartByUser(data['UserID'])
 
         for row in result:
-            db.addPurchase(None, row['ItemID'], row['UserID'], data['DateTime'], row['Quantity'])
+            print(row)
+            db.addPurchase(None, row['ItemID'], data['UserID'], data['DateTime'], row['Quantity'])
+            db.deleteCartItem(row['ItemID'], data['UserID'])
 
         return "success"
 

@@ -5,6 +5,7 @@ import '../css/Item.css';
 import {Link} from 'react-router-dom';
 import { resolve } from 'dns';
 import { reject } from 'q';
+import moment from 'moment';
 
 
 var data = [
@@ -56,7 +57,7 @@ class Item extends React.Component {
         let item = {
             ItemID: this.state.itemId,
             UserID: localStorage.getItem('loginID'),
-            Date: "today",
+            Date: moment.format(),
             Quantity: 1,
         };
         axios.post("http://localhost:5000/addPurchase", item)

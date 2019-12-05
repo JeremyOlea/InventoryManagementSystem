@@ -159,7 +159,7 @@ class imsdatabase():
         cursor = self.conn.cursor()
         cursor.execute(sql.format(UserID))
         result = cursor.fetchall()
-
+    
         items = []
         for row in result:
             items.append({ 'ItemID' : row[0], 'Name' : row[1], 'Price' : row[2], 'Gender' : row[3], \
@@ -209,7 +209,7 @@ class imsdatabase():
         sql = """ SELECT * FROM CART WHERE UserID = '{0}' """
         cursor = self.conn.cursor()
         cursor.execute(sql.format(UserID))
-        result = fetchall()
+        result = cursor.fetchall()
 
         items = []
         for row in result:

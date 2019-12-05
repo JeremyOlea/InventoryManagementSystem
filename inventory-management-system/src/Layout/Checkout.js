@@ -2,9 +2,19 @@ import Navbar from './Navbar';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Checkout.css';
+import axios from 'axios';
+import moment from 'moment';
+import history from '../History';
 
 
 export default class Checkout extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cart: [],
+    }
+  }
+
     render(){
         return (
             
@@ -50,7 +60,7 @@ export default class Checkout extends React.Component {
             <Input label="CVV" type="number" name="cvv" />
           </div>
         </div>
-        <Button text="Purchase" />
+        <Button text="Purchase"/>
       </div>
    </div>
   );
@@ -66,6 +76,26 @@ export default class Checkout extends React.Component {
   );
   
   const Button = (props) => (
-    <button className="checkout-btn" type="button">{props.text}</button>
+    <button className="checkout-btn" type="button" onClick = {() => purchase()}>{props.text}</button>
   );
+
+  function purchase() {
+    let ID = localStorage.getItem('loginID');
+    console.log(ID);
+    if(localStorage.getItem("loginID") != null) {
+      let info = {
+        UserID: ID,
+        DateTime: moment(),
+      };
+      axios.post("http://localhost:5000/cartToPurchase", info)
+      .then(res => {
+        alert(res.data);
+        history.pushState('/');
+      }).catch(err => {
+        alert(err);
+      })
+    } else {
+      alert("must be logged in");
+    }
+  }
   
