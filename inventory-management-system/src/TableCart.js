@@ -28,7 +28,7 @@ class Table3 extends Component {
 
       return (
       <div>
-          <BootstrapTable data={this.props.data} selectRow={selectedRow} deleteRow>
+          <BootstrapTable data={this.props.data}>
           <TableHeaderColumn dataField='id' >
             Item ID
           </TableHeaderColumn>

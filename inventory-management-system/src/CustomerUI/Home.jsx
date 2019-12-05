@@ -240,7 +240,7 @@ class Home extends Component {
         <div className="Home">
           <div className="Light">
             <h1 className="App-header">
-              Shop Name<br></br>
+             S T O K E D C L O T H I N G<br></br>
             </h1>
             <form> 
                 {this.state.user ? this.logged() : this.notLogged()}

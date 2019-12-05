@@ -25,6 +25,7 @@ class Item extends React.Component {
             itemId : this.props.match.params.itemId,
             item: localStorage.getItem('mydata' + this.props.match.params.itemId),
             loaded: localStorage.getItem('loaded' + this.props.match.params.itemId),
+            image: null,
         };
 
         this.addCart = this.addCart.bind(this);
@@ -38,11 +39,13 @@ class Item extends React.Component {
         }).then(res => {
             this.setState({
                 item : res.data,
+                image: res.data['Image'],
                 loaded: true,
             })
             localStorage.setItem('mydata' + this.props.match.params.itemId, this.state.item);
             localStorage.setItem('loaded' + this.props.match.params.itemId, this.state.loaded);
             console.log("finished mount");
+            console.log(res.data);
         }).catch(err => {
             console.log(err);
         })
@@ -92,29 +95,31 @@ class Item extends React.Component {
     }
 
     load() {
+        let src = this.state.image;
         return(
             <div>
                 <div className="sidenav">
                     <Link to="/">Home</Link>
                     <a href="#" onClick={() => {this.addCart()}}>Add To Cart</a>
-                    <a href="#" onClick={() => {this.purchaseItem()}}>Checkout</a>
+                    {/* <a href="#" onClick={() => {this.purchaseItem()}}>Checkout</a> */}
                 </div>
                 <div className="content">
-                    <p>Air Force 1s</p>
+                    <p>{this.state.item['Name']}</p>
                     <div className="shoesImg">
-                    <img  src={require('../Images/AF1.jpg')} className="img-thumbnail"/>
+                    {this.state.image ? <img src={require(""+this.state.image)} className="img-thumbnail" responsive /> : null}
+                    {/* <img  src={require(src)} className="img-thumbnail"/> */}
                     
                     </div>
                     <p>Price: {this.state.item['Price']}</p>
                 </div>
                 <div className = "Info">
                 <br></br><br></br><br></br><br></br>
-                Quantity <emsp></emsp>
-                <select className="drop-down-menu">
+                {/* Quantity <emsp></emsp> */}
+                {/* <select className="drop-down-menu">
                         <option selected="selected" value="one">1</option>
                         <option value="two">2</option>
                         <option value="three">3</option>
-                    </select>
+                    </select> */}
                 </div>
             </div>
         );
