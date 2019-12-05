@@ -38,6 +38,7 @@ class Item extends React.Component {
             localStorage.setItem('mydata' + this.props.match.params.itemId, this.state.item);
             localStorage.setItem('loaded' + this.props.match.params.itemId, this.state.loaded);
             console.log("Success");
+            console.log(this.props.match.params.itemId);
         }).catch(err => {
             console.log(err);
         })
@@ -58,11 +59,17 @@ class Item extends React.Component {
             alert("please log in");
         } else {
             let item = {
-
+                ItemID: this.props.match.params.itemId,
+                UserID: localStorage.getItem('login'),
+                Quantity: 1
             }
-            // axios.get("http://localhost:5000/addToCart", item)
+            axios.get("http://localhost:5000/addToCart", item)
+            .then(res => {
+                console.log(res);
+            }) .catch(err => {
+                console.log(err);
+            });
         }
-
     }
 
     load() {

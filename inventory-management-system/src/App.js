@@ -12,7 +12,7 @@ const App = () => {
     <Router>
       <Route exact path="/" component={Home} />
     </Router>
-    <Manager/>
+
     </div>
   );
 }

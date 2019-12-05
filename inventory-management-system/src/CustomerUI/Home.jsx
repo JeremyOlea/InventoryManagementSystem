@@ -187,7 +187,7 @@ class Home extends Component {
         return (
           <Manager/> 
         );
-    }
+    } else {
       return (
         <div className="Home">
           <div className="Light">
@@ -241,51 +241,11 @@ class Home extends Component {
           <br></br><br></br><br></br><br></br><br></br><br></br>
           <br></br><br></br><br></br><br></br><br></br><br></br>
           <br></br><br></br><br></br><br></br><br></br><br></br>
-          {/* <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" /> */}
-            <Tabs defaultIndex={0}>
-              <TabList>
-                <Tab>Home</Tab>
-                <Tab>Purchases</Tab>
-                <Tab>Cart</Tab>
-              </TabList>
-              <TabPanel className="HomePanel">
-                <Table1 data={this.state.items}/>
-
-              </TabPanel>
-              <TabPanel className="PurchasesPanel">
-                <Table2 data={data2}/>
-              </TabPanel>
-              <TabPanel className="CartPanel">
-                
-                <Table3 data={data3}>
-              
-                </Table3>
-                <Link to="/cart">
-                <button type="button" class="btn btn-primary" >Checkout</button>
-                </Link>
-              </TabPanel>
-            </Tabs>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
           </div>
         </div>
       );
     }
+  }
 
 }
 export default Home;
