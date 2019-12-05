@@ -186,7 +186,7 @@ class Home extends Component {
         return (
           <Manager/> 
         );
-    }
+    } else {
       return (
         <div className="Home">
           <div className="Light">
@@ -197,52 +197,54 @@ class Home extends Component {
                 {this.state.user ? this.logged() : this.notLogged()}
             </form>
         {/* <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" /> */}
-            <Tabs defaultIndex={0}>
-              <center>
-                <TabList>
-                  <Tab>Home</Tab>
-                  <Tab>Purchases</Tab>
-                  <Tab>Cart</Tab>
-                </TabList>
-              </center>
-              <TabPanel className="Light">
-                <Table1 data={this.state.items}/>
+          <Tabs defaultIndex={0}>
+            <center>
+              <TabList>
+                <Tab>Home</Tab>
+                <Tab>Purchases</Tab>
+                <Tab>Cart</Tab>
+              </TabList>
+            </center>
 
-              </TabPanel>
-              <TabPanel className="Light">
-                <Table2 data={data2}/>
-              </TabPanel>
-              <TabPanel className="Light">
-                
-                <Table3 data={data3}>
+            <TabPanel className="Light">
+              <Table1 data={this.state.items}/>
+
+            </TabPanel>
+            <TabPanel className="Light">
+              <Table2 data={data2}/>
+            </TabPanel>
+            <TabPanel className="Light">
               
-                </Table3>
-                <Link to="/cart">
-                  <button type="button" class="btn btn-primary">Checkout</button>
-                </Link>
-              </TabPanel>
-            </Tabs>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
+              <Table3 data={data3}>
+            
+              </Table3>
+              <Link to="/cart">
+                <button type="button" class="btn btn-primary">Checkout</button>
+              </Link>
+            </TabPanel>
+          </Tabs>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
           </div>
         </div>
       );
     }
+  }
 
 }
 export default Home;
