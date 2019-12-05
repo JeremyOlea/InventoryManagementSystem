@@ -197,9 +197,6 @@ class Home extends Component {
             <form> 
                 {this.state.user ? this.logged() : this.notLogged()}
             </form>
-            <div>
-            </div>
-          </center>
         {/* <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" /> */}
           <Tabs defaultIndex={0}>
             <center>
