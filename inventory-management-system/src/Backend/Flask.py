@@ -79,6 +79,18 @@ class validate_user(Resource):
         db = DatabaseController.imsdatabase()
         return db.validateUser(data['email'])
 
+class add_to_cart(Resource):
+    def post(self):
+        data = request.get_json()
+        db = DatabaseController.imsdatabase()
+        return db.addToCart(data['ItemID'], data['UserID'], data['Quantity'])
+
+class get_cart(Resource):
+    def post(self):
+        data = request.get_json()
+        db = DatabaseController.imsdatabase()
+        return db.addAllCart(data['ItemID'], data['UserID'])
+
 api.add_resource(get_all_items, '/getItems')
 api.add_resource(get_all_tops, '/getTops')
 api.add_resource(get_all_bottoms, '/getBottoms')
@@ -90,6 +102,8 @@ api.add_resource(add_purchase, '/addPurchase')
 api.add_resource(get_purchases, '/getPurchases')
 api.add_resource(get_item_by_id, '/getItemById')
 api.add_resource(validate_user, '/validateUser')
+api.add_resource(add_to_cart, '/addToCart')
+api.add_resource(get_cart, '/getAllCart')
 
 if __name__ == "__main__":
     app.run()

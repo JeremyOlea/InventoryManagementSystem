@@ -33,6 +33,7 @@ var data3 = [
   {id: 101, name: 'Sketchers', Price: 10000, quantity: 1, size: 9, }
 ];
 
+
 var total=0;
 
 
@@ -79,10 +80,10 @@ class Home extends Component {
       console.log(res);
       let testdata = [];
       for(let i = 0; i < res.data.length; i++) {
-        testdata.push({image: './Images/AF1.jpg', name: res.data[i]['Name'], value: res.data[i]['Price'], id:i});
+        testdata.push({image: './Images/AF1.jpg', name: res.data[i]['Name'], value: res.data[i]['Price'], id: res.data[i]['ItemID']});
       }
       this.setState({
-        items : testdata
+        items : testdata,
       })
       this.sumTotal(data3);
       console.log(testdata);
@@ -135,7 +136,7 @@ class Home extends Component {
               <Tab>Cart</Tab>
             </TabList>
             <TabPanel className="HomePanel">
-              <Table1 data={this.state.items} />
+              <Table1 data={this.state.items}/>
 
             </TabPanel>
             <TabPanel className="PurchasesPanel">

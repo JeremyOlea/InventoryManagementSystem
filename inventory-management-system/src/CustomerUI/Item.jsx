@@ -53,20 +53,41 @@ class Item extends React.Component {
         // axios.post("http://localhost:5000/addPurchase", );
     }
 
+    checkout() {
+        // axios.get("http://localhost:5000/addToCart", item)
+    }
+
     load() {
         return(
             <div>
                 <div className="sidenav">
                     <Link to="/">Home</Link>
                     <Link to='/'>Add To Cart</Link>
-                    <Link to='/cart'>Checkout</Link>
+                    <Link to='#' onClick={this.checkout}>Checkout</Link>
                 </div>
                 <div className="content">
                     <p>Air Force 1s</p>
                     <div className="shoesImg">
                     <img  src={require('../Images/AF1.jpg')} className="img-thumbnail"/>
+                    
                     </div>
                     <p>Price: {this.state.item['Price']}</p>
+                </div>
+                <div className = "Info">
+                <br></br><br></br><br></br><br></br>
+                Size <emsp></emsp>
+                <select className="drop-down-menu">
+                        <option selected="selected" value="one">Small</option>
+                        <option value="two">Medium</option>
+                        <option value="three">Large</option>
+                </select>
+                <br></br>
+                Quantity
+                <select className="drop-down-menu">
+                        <option selected="selected" value="one">Small</option>
+                        <option value="two">Medium</option>
+                        <option value="three">Large</option>
+                    </select>
                 </div>
             </div>
         );

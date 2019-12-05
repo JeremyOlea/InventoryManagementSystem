@@ -9,6 +9,18 @@
     overflow-x: hidden;
 }
 
+.Info {
+    background-color: rgb(36, 41, 61);
+    position: absolute;
+    z-index: 2;
+    float: right;
+    right: 0;
+    top: 0;
+    align-content: center;
+    padding: 20px;
+    color: white;
+}
+
 .sidenav-loading {
     height: 100%;
     width: 200px;

@@ -24,8 +24,8 @@ class imsdatabase():
         #convert it to JSON
         items =[]
         for row in result:
-            items.append({ 'ItemID' : row[0], 'Image' : row[1], 'Name' : row[2], 'Price' : row[3], \
-             'Gender' : row[4], 'Stock' : row[5], 'StoreID' : row[6], 'Suppler' : row[7]})
+            items.append({ 'ItemID' : row[0], 'Name' : row[1], 'Price' : row[2], 'Gender' : row[3], \
+             'Stock' : row[4], 'StoreID' : row[5], 'SupplierID' : row[6], 'Image' : row[7]})
         cursor.close()
         return items
 
@@ -151,4 +151,39 @@ class imsdatabase():
         else:
             return "failed"
 
-        
+    def getAllCart(self, ItemID, UserID):
+        sql = """   SELECT *
+                    FROM ITEM as I, CART as C
+                    WHERE   C.ItemID = {0} AND C.ItemID = I.ItemID
+                            AND C.UserID = {1}"""
+        cursor = self.conn.cursor()
+        row_count = cursor.execute(sql.format(ItemID, UserID))
+        result = cursor.fetchall()
+
+        items = []
+        for row in result:
+            items.append({ 'ItemID' : row[0], 'Name' : row[1], 'Price' : row[2], 'Gender' : row[3], \
+             'Stock' : row[4], 'StoreID' : row[5], 'SupplierID' : row[6], 'Image' : row[7]})
+        cursor.close()
+        return items
+
+    def addToCart(self, ItemID, UserID, Quantity):
+        sql = """   SELECT ItemID
+                    FROM CART
+                    WHERE ItemID = '{0}' """
+        cursor = self.conn.cursor()
+        row_count = cursor.execute(sql.format(ItemID))
+        result = cursor.fetchone()
+
+        if row_count == None:
+            sql2 = """  INSERT INTO CART VALUES ({0}, {1}, {2}) """
+            cursor.execute(sql2.format(ItemID, UserID, Quantity))
+            self.conn.commit()
+        else:
+            sql3 = """  UPDATE CART
+                        SET Quantity = {0}
+                        WHERE ItemID = {1} AND UserID = {2} """
+            cursor.execute(sql3.format(result[2] + Quantity, ItemID, UserID))
+            self.conn.commit()
+        cursor.close()
+        return
