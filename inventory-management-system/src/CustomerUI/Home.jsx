@@ -182,7 +182,7 @@ class Home extends Component {
   }
 
   render(){
-    if(this.state.admin === 1) {
+    if(this.state.admin == 1) {
         return (
           <Manager/> 
         );

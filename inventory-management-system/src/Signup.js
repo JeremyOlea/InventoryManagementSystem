@@ -139,8 +139,8 @@ class Signup extends Component {
     }
 
     checkFields() {
-      if(this.state.firstName === '' || this.state.lastName === '' || this.state.address === '' ||
-      this.state.email === '' || this.state.password === '' || this.state.confirmPassword === '') {
+      if(this.state.firstName == '' || this.state.lastName == '' || this.state.address == '' ||
+      this.state.email == '' || this.state.password == '' || this.state.confirmPassword == '') {
         return false;
       } else {
         return true;
@@ -150,7 +150,7 @@ class Signup extends Component {
     signUp() {
       if(!this.checkFields()) {
         alert("Please fill out all fields");
-      } else if(this.state.password === this.state.confirmPassword) {
+      } else if(this.state.password == this.state.confirmPassword) {
         let user = {
           firstName: this.state.firstName,
           lastName: this.state.lastName,
@@ -161,7 +161,7 @@ class Signup extends Component {
 
         axios.post('http://localhost:5000/validateUser', user)
         .then(res => {
-          if(res.data === "success") {
+          if(res.data == "success") {
             axios.post('http://localhost:5000/registerUser', user)
             .then(res =>{
                 console.log(res);
