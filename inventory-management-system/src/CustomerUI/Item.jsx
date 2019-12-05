@@ -56,8 +56,13 @@ class Item extends React.Component {
     checkout() {
         if(!localStorage.getItem('login')) {
             alert("please log in");
+        } else {
+            let item = {
+
+            }
+            // axios.get("http://localhost:5000/addToCart", item)
         }
-        // axios.get("http://localhost:5000/addToCart", item)
+
     }
 
     load() {
