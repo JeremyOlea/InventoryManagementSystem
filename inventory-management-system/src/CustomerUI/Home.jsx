@@ -155,7 +155,7 @@ class Home extends Component {
 
   notLogged() {
     return(
-      <span className="login">
+      <span className="Light">
         <input type="text" placeholder="Email" value={this.state.email} onChange={this.handleEmailChange}></input>
         <input type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange}></input>
         <Button onClick={this.checkLogin}>Login</Button>
@@ -174,37 +174,42 @@ class Home extends Component {
 
   render(){
     return (
-      <div className="Home">
-        <div>
-          <h1 className="App-header">
-            Shop Name<br></br>
-          </h1>
-          <form> 
-              {this.state.user ? this.logged() : this.notLogged()}
-          </form>
-        <div>
-        </div>
+      <div className="Light">
+        <div>  
+          <center>  
+            <h1 className="App-header">
+              Shop Name<br></br>
+            </h1>
+            <form> 
+                {this.state.user ? this.logged() : this.notLogged()}
+            </form>
+            <div>
+            </div>
+          </center>
         {/* <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" /> */}
           <Tabs defaultIndex={0}>
-            <TabList>
-              <Tab>Home</Tab>
-              <Tab>Purchases</Tab>
-              <Tab>Cart</Tab>
-            </TabList>
-            <TabPanel className="HomePanel">
+            <center>
+              <TabList>
+                <Tab>Home</Tab>
+                <Tab>Purchases</Tab>
+                <Tab>Cart</Tab>
+              </TabList>
+            </center>
+
+            <TabPanel className="Light">
               <Table1 data={this.state.items}/>
 
             </TabPanel>
-            <TabPanel className="PurchasesPanel">
+            <TabPanel className="Light">
               <Table2 data={data2}/>
             </TabPanel>
-            <TabPanel className="CartPanel">
+            <TabPanel className="Light">
               
               <Table3 data={data3}>
             
               </Table3>
               <Link to="/cart">
-              <button type="button" class="btn btn-primary" >Checkout</button>
+                <button type="button" class="btn btn-primary">Checkout</button>
               </Link>
             </TabPanel>
           </Tabs>
