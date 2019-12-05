@@ -78,14 +78,14 @@ class Home extends Component {
   }
 
 
-  linkFlask(event) {
-    event.preventDefault();
-    axios.get('http://localhost:5000/HelloWorld')
-    .then(res => {
-        console.log(res);
-        alert(res.data['hello']);
-    })
-  }
+  // linkFlask(event) {
+  //   event.preventDefault();
+  //   axios.get('http://localhost:5000/HelloWorld')
+  //   .then(res => {
+  //       console.log(res);
+  //       alert(res.data['hello']);
+  //   })
+  // }
   
   checkLogin(event){
     event.preventDefault();
@@ -110,7 +110,8 @@ class Home extends Component {
             lname: res.data['Lname'],
             address: res.data['Address'],
             email: res.data['email'],
-            password: res.data['password']
+            password: res.data['password'],
+            admin: res.data['Admin'],
           }
         })
       }

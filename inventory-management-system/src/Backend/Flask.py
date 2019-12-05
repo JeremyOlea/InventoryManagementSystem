@@ -54,6 +54,13 @@ class check_login(Resource):
         retval = db.checkLogin(data['email'], data['password'])
         return retval;
 
+class restock_item(Resource):
+    def post(self):
+        db = DatabaseController.imsdatabase()
+        data = request.get_json()
+        db.restock(data['id'], data['amount'])
+        return
+
 api.add_resource(get_all_items, '/getItems')
 api.add_resource(get_all_tops, '/getTops')
 api.add_resource(get_all_bottoms, '/getBottoms')
@@ -61,6 +68,7 @@ api.add_resource(get_all_shoes, '/getShoes')
 api.add_resource(get_all_accessories, '/getAccessories')
 api.add_resource(hello_world, '/HelloWorld')
 api.add_resource(check_login, '/checkLogin')
+api.add_resource(restock_item, '/restock')
 
 if __name__ == "__main__":
     app.run()
