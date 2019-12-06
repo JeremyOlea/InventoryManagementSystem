@@ -51,7 +51,7 @@ class Signup extends Component {
     
     render() {
         return (
-          <div>
+          <div className="Light">
           <MDBContainer>
             <MDBRow>
               <MDBCol md="6">
@@ -134,6 +134,10 @@ class Signup extends Component {
           {/* <Button color="unique" type="submit" onClick={() => this.signUp()}>
                       Register
                     </Button> */}
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            
           </div>
         );
     }
