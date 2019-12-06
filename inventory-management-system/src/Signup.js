@@ -123,17 +123,20 @@ class Signup extends Component {
                     onChange={this.handleCpasswordChange}
                   />
                   <div className="text-center mt-4">
-                    <Button color="unique" type="submit" onClick={() => this.signUp()}>
+                    {/* <Button color="unique" type="submit" onClick={() => this.signUp()}>
                       Register
-                    </Button>
+                    </Button> */}
                   </div>
                 </form>
               </MDBCol>
             </MDBRow>
           </MDBContainer>
-          {/* <Button color="unique" type="submit" onClick={() => this.signUp()}>
-                      Register
-                    </Button> */}
+          <center>
+            <Button color="unique" type="submit" onClick={() => this.signUp()}>
+              Register
+            </Button>
+          </center>
+         
             <br></br><br></br><br></br><br></br><br></br><br></br>
             <br></br><br></br><br></br><br></br><br></br><br></br>
             <br></br><br></br><br></br><br></br><br></br><br></br>
@@ -154,7 +157,7 @@ class Signup extends Component {
     signUp() {
       if(!this.checkFields()) {
         alert("Please fill out all fields");
-      } else if(this.state.password == this.state.confirmPassword) {
+      } else if(this.state.password === this.state.confirmPassword) {
         let user = {
           firstName: this.state.firstName,
           lastName: this.state.lastName,
@@ -165,7 +168,7 @@ class Signup extends Component {
 
         axios.post('http://localhost:5000/validateUser', user)
         .then(res => {
-          if(res.data == "success") {
+          if(res.data === "success") {
             axios.post('http://localhost:5000/registerUser', user)
             .then(res =>{
                 console.log(res);

@@ -99,6 +99,12 @@ class imsdatabase():
         cursor.execute(sql2.format(PurchaseID, ItemID, UserID, DateTime, Quantity))
         self.conn.commit()
 
+        sql4 = """ UPDATE ITEM 
+                    SET Stock = Stock - '{0}'
+                    WHERE ItemID = '{1}' """
+
+        cursor.execute(sql4.format(Quantity, ItemID))
+        self.conn.commit()
         # else:
         #     sql3 = """  UPDATE PURCHASE 
         #                 SET Quantity = {0} 

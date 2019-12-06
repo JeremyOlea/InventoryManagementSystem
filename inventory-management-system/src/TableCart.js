@@ -35,8 +35,8 @@ class Table3 extends Component {
           <TableHeaderColumn isKey={true} dataField='name' dataSort={true}>
             Name
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='Price' dataSort={true}>
-            Value
+          <TableHeaderColumn dataField='value' dataSort={true}>
+            Price
           </TableHeaderColumn>
           <TableHeaderColumn dataField='quantity'>
             Quantity
